@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="fragments/head :: head"></head>
+
+<body id="page-top">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+    <!--  sidebar -->
+      <div th:insert="fragments/sidebar :: sidebar"></div>
+      <!--  end sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <!-- Main Content -->
+      <div id="content">
+        <!--  topbar -->
+      <div th:insert="fragments/topbar :: topbar"></div>
+       <!--  end topbar -->
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+            
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+        <!--  footer -->
+           <footer th:replace="fragments/footer :: footer" ></footer>
+        <!--  end footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+ <!-- Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
+    <div th:insert="fragments/js :: js"></div>
+  <!--  end Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
+</body>
+
+</html>

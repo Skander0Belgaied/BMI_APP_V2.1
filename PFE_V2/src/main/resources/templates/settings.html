@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title></title>
+<div  th:replace="fragments/head :: head">
+</div>
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+      <!--  sidebar -->
+      <div th:insert="fragments/sidebar :: sidebar"></div>
+      <!--  end sidebar -->
+
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+             <!--  topbar -->
+      <div th:insert="fragments/topbar :: topbar"></div>
+       <!--  end topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800">settings</h1>
+          <form action="" method=""> 
+          <div class="form-group row">
+          <!--     <label for="example-text-input" class="col-2 col-form-label">Type de serveur </label>
+              <div class="col-4">
+                <select class="form-control" id="exampleFormControlSelect1">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                </select>
+              </div>-->
+          <label for="example-search-input" class="col-2 col-form-label">Nom du serveur</label>
+            <div class="col-4">
+              <input class="form-control" type="text" value="" id="example-search-input">
+            </div>
+               <label for="example-search-input" class="col-2 col-form-label">JDBC URL</label>
+            <div class="col-4">
+              <input class="form-control" type="text" value="" id="example-search-input">
+            </div>
+        </div>
+      <!--  <div class="form-group row">
+         <label for="example-search-input" class="col-2 col-form-label">JDBC Driver</label>
+          <div class="col-4">
+            <select class="form-control" id="exampleFormControlSelect1">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+            </select>
+            </div>
+            <label for="example-search-input" class="col-2 col-form-label">JDBC URL</label>
+            <div class="col-4">
+              <input class="form-control" type="text" value="" id="example-search-input">
+            </div>
+        </div>-->
+        <div class="form-group row">
+          <label for="example-search-input" class="col-2 col-form-label">nomd'utilisateur</label>
+          <div class="col-4">
+            <input class="form-control" type="text" value="" id="example-search-input">
+          </div>
+          <label for="example-search-input" class="col-2 col-form-label">mot de passe</label>
+          <div class="col-4">
+            <input class="form-control" type="password" value="" id="example-search-input">
+          </div>
+        </div>
+         <button class="btn btn-primary float-right" type="submit">Modifier</button>
+        </form>
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- End of Main Content -->
+
+      <!--  footer -->
+        <footer th:replace="fragments/footer :: footer" ></footer>
+      <!--  end footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+  <!-- Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
+    <div th:insert="fragments/js :: js"></div>
+  <!--  end Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
+</body>
+
+</html>

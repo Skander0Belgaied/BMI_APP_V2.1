@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c8b70ae-bc9d-4ae8-8832-99f6c69beade">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sqlserveur"/>
+	<parameter name="Total" class="java.lang.Double"/>
+	<queryString language="SQL">
+		<![CDATA[select totalCout from vPER_BMIEQU where totalCout<>0]]>
+	</queryString>
+	<field name="totalCout" class="java.lang.Double">
+		<fieldDescription><![CDATA[totalCout]]></fieldDescription>
+	</field>
+	<variable name="cumulé" class="java.lang.Float" incrementType="Group" incrementGroup="totalCout" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalCout}]]></variableExpression>
+	</variable>
+	<variable name="cumulé % " class="java.lang.Double">
+		<variableExpression><![CDATA[($V{cumulé}/$P{Total})*100]]></variableExpression>
+	</variable>
+	<variable name="totalCout%" class="java.lang.Double">
+		<variableExpression><![CDATA[(($F{totalCout}/$P{Total})*100)%.3f]]></variableExpression>
+	</variable>
+	<group name="totalCout">
+		<groupExpression><![CDATA[$F{totalCout}]]></groupExpression>
+	</group>
+	<title>
+		<band height="683" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="65" width="531" height="30" uuid="24d59fab-73ca-4306-a083-b28ad5d5db48"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<text><![CDATA[Classement ABC des Equipement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="4" width="70" height="25" forecolor="#5C5959" uuid="c109d2da-5f6c-497f-8e1f-0d134f3f7b84"/>
+				<text><![CDATA[Destinataire :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="32" width="70" height="25" forecolor="#5C5959" uuid="0809f2d3-858a-426d-9b03-e438018e1fa4"/>
+				<text><![CDATA[Société :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="1" width="70" height="25" forecolor="#5C5959" uuid="692eafc8-6d6a-4e73-a981-6edff4c59bab"/>
+				<text><![CDATA[Edité le]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="321" y="0" width="70" height="25" forecolor="#5C5959" uuid="5a3b3b26-f6ae-44b9-b607-20ce50079cd6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="400" y="0" width="70" height="25" forecolor="#5C5959" uuid="8bcec35e-5143-41c2-8c2e-480102ba236a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="190" width="555" height="470" forecolor="#000000" backcolor="#FFFFFF" uuid="9d181c9b-698f-4bdd-8874-dac711889376"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="390" y="0" width="70" height="25" forecolor="#5C5959" uuid="8af607e9-880f-43da-b657-16fb35fd25a0"/>
+				<text><![CDATA[à]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="269" width="116" height="20" uuid="419043f9-e1dd-4bd1-b1f7-080d734c1c51"/>
+				<textElement>
+					<font size="14"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[Equipement :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="316" width="60" height="20" uuid="24abe977-aaaa-4063-882c-2ef08b8e4015"/>
+				<textElement>
+					<font size="14"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[Groupe :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="361" width="70" height="20" uuid="7446e526-9118-4cee-ae94-418d21f68f70"/>
+				<textElement>
+					<font size="14"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[Type de travail : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="406" width="70" height="20" uuid="f0c37ee9-03d2-4d78-991a-4d356d91835f"/>
+				<textElement>
+					<font size="14"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[Organisation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="451" width="100" height="20" uuid="02a99989-1830-4fbb-8aac-6296f44222dd"/>
+				<textElement>
+					<font size="14"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[Centre de coùt :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="496" width="100" height="20" uuid="989d8772-a243-4230-a9fb-591cce0ae3f0"/>
+				<textElement>
+					<font size="14"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[Date début :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="541" width="100" height="20" uuid="055e0d0e-99cf-4427-849a-d2511a964d65"/>
+				<textElement>
+					<font size="14"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[Date fin :]]></text>
+			</staticText>
+			<break>
+				<reportElement x="0" y="670" width="96" height="1" uuid="2ff6a257-9279-42aa-82db-abff879920a4"/>
+			</break>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="68" width="100" height="13" uuid="10c548d5-a3c4-4033-8a5a-83dce45d63d6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62f8690f-3833-44b6-a993-f2941fba2f58"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="21" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.0" lineStyle="Double" lineColor="#0600A8"/>
+				</box>
+				<text><![CDATA[totalCoutcout]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="68" width="100" height="13" uuid="7e2468e5-4da4-4170-ba5f-db92694e5aaf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7b2c9c9-301f-4ed0-bdcc-f12ceb6b69b6"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="21" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.0" lineStyle="Double" lineColor="#0600A8"/>
+				</box>
+				<text><![CDATA[Total cout %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="391" y="68" width="100" height="13" uuid="6a7654d8-d9a3-4dc0-a81c-c2582a2c7388">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7b2c9c9-301f-4ed0-bdcc-f12ceb6b69b6"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="21" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.0" lineStyle="Double" lineColor="#0600A8"/>
+				</box>
+				<text><![CDATA[cumulé %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="68" width="100" height="13" uuid="9e78b9a6-a3e0-437f-a63d-11ee8b09b499">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7b2c9c9-301f-4ed0-bdcc-f12ceb6b69b6"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="21" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.0" lineStyle="Double" lineColor="#0600A8"/>
+				</box>
+				<text><![CDATA[cumulé]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="13" width="531" height="30" uuid="0c8aca57-2a04-48d9-91ff-811079b4d5ad"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<text><![CDATA[Classement ABC des Equipement]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="28" y="6" width="100" height="19" uuid="f4e5a28f-3ae1-494d-958b-68ceecf4d9e0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62f8690f-3833-44b6-a993-f2941fba2f58"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{totalCout}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="278" y="6" width="100" height="19" uuid="a036445f-8a11-4e7a-b49a-25d46e0bcd01"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#.######").format(($F{totalCout}/$P{Total})*100)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="6" width="100" height="19" uuid="db0a6a30-d553-44a2-bd27-08d0cb96690c"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#.#######").format(($V{cumulé}/$P{Total})*100)]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="0" y="5" width="555" height="20" uuid="a81486de-e102-4e82-8ffa-5db33aa59d83"/>
+				<box padding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+			</frame>
+			<textField>
+				<reportElement x="153" y="6" width="100" height="19" uuid="77ea5de7-a4b7-4bae-a462-21cd20baf234"/>
+				<textFieldExpression><![CDATA[$V{cumulé}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="38">
+			<textField>
+				<reportElement x="227" y="8" width="100" height="30" uuid="fec9a8f1-4a57-4ad4-88f2-5c52250587b6"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="80" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title></title>  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Custom fonts for this template-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet"><div th:replace="fragments/head :: head"></div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="/postrequest.js"></script>
+ <script src="/getrequest.js"></script>
+</head>
+
+<body id="page-top">
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<!--  sidebar -->
+		<div th:insert="fragments/sidebar :: sidebar"></div>
+		<!--  end sidebar -->
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<!-- Main Content -->
+			<div id="content">
+				<!--  topbar -->
+				<div th:insert="fragments/topbar :: topbar"></div>
+				<!--  end topbar -->
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid" id="page-content">
+					<!-- Page Heading -->
+					<h1 class="h3 mb-4 text-gray-800">configuration d'utilisateur</h1>
+					<div class="row">
+
+						<!-- Card Example -->
+						<div class="col-xl-4 col-md-6 mb-4" id="adduser">
+							<a class="dropdown-item" href="#/" data-toggle="modal"
+								data-target="#ajoututilisateur">
+								<div class="card border-left-primary shadow h-100 py-2">
+									<div class="card-body">
+										<div class="row no-gutters align-items-center">
+											<div class="col mr-2">
+												<div
+													class="text-xs font-weight-bold text-primary text-uppercase mb-1">ajout
+													utilisateur</div>
+												<div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+											</div>
+											<div class="col-auto">
+												<i class="fas fa-user-plus fa-2x text-gray-300"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+
+
+
+						<!-- Card Example -->
+						<div class="col-xl-4 col-md-6 mb-4" id="updtuser">
+							<a class="dropdown-item" href="#" data-toggle="modal"
+								data-target="#modifierutilisateur">
+								<div class="card border-left-success shadow h-100 py-2">
+									<div class="card-body">
+										<div class="row no-gutters align-items-center">
+											<div class="col mr-2">
+												<div
+													class="text-xs font-weight-bold text-success text-uppercase mb-1">modifier
+													utilisateur</div>
+												<div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+											</div>
+											<div class="col-auto">
+												<i class="fas fa-user-edit fa-2x text-gray-300"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+
+
+						<!-- Card Example -->
+						<div class="col-xl-4 col-md-6 mb-4" id="deleteuser">
+							<a class="dropdown-item" href="#" data-toggle="modal"
+								data-target="#suprimerutilisateur">
+								<div class="card border-left-info shadow h-100 py-2">
+									<div class="card-body">
+										<div class="row no-gutters align-items-center">
+											<div class="col mr-2">
+												<div
+													class="text-xs font-weight-bold text-info text-uppercase mb-1">supprimer
+													utilisateur</div>
+												<div class="row no-gutters align-items-center">
+													<div class="col-auto">
+														<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
+													</div>
+													<div class="col"></div>
+												</div>
+											</div>
+											<div class="col-auto">
+												<i class="fas fa-user-minus fa-2x text-gray-300"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+
+					</div>
+					<!-- /.container-fluid -->
+					<!-- Modal fade ajouter utilisateur-->
+					<div class="modal fade" id="ajoututilisateur" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+
+								<div class="modal-body">
+									<button class="close" type="button" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<div class="card-header ">
+										<h6 class="m-0 font-weight-bold text-primary">ajouter
+											utilisateur</h6>
+									</div>
+									<div class="card-body">
+										<form>
+											<div class="form-group row">
+												<label for="firstname" class="col-md-2 col-form-label">nom</label>
+												<div class="col-md-10">
+													<input type="text" class="form-control" id="utilisateurNom"
+														placeholder="entrer le nom">
+												</div>
+												<label for="lastname" class="col-md-2 col-form-label">PrÃ©nom</label>
+												<div class="col-md-10">
+													<input type="email" class="form-control" id="utilisateurPrenom"
+														placeholder="entrer le prÃ©nom">
+												</div>
+												<label for="exampleInputEmail1"
+													class="col-sm-2 col-form-label">Email address</label>
+												<div class="col-md-10">
+													<input type="email" class="form-control"
+														id="utilisateurEmail" aria-describedby="emailHelp"
+														placeholder="Entrer lemail"><small id="emailHelp"
+														class="form-text text-muted">Nous ne partagerons
+														jamais votre email avec qui que ce soit.</small>
+												</div>
+												<label for="exampleInputPassword1"
+													class="col-sm-2 col-form-label">Mot de passe</label>
+												<div class="col-md-10">
+													<input type="password" class="form-control"
+														id="utilisateurPassword" placeholder="Mot de passe">
+												</div>
+												<label for="exampleInputPassword1"
+													class="col-sm-2 col-form-label"> reÃ©crire Mot de
+													passe</label>
+												<div class="col-md-10">
+													<input type="password" class="form-control"
+														placeholder="reÃ©crire Mot de passe">
+												</div>
+												<div class="form-check form-check-inline">
+													<label class="form-check-label" for="inlineCheckbox1">cochez
+														ici si vous allez ajouter un admin</label><input
+														class="form-check-input" type="checkbox"
+														id="utilisateurType" name="utilisateurType" value="ADMIN">
+
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button class="btn btn-secondary" type="button"
+													data-dismiss="modal">Cancel</button>
+												<button type="button" id="ajoutForm" class="btn btn-primary">Ajouter</button>
+											</div>
+
+										</form>
+										<div id="ajoutResult"></div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="modal fade" id="modifierutilisateur" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+
+								<div class="modal-body">
+									<button class="close" type="button" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<div class="card-header ">
+										<h6 class="m-0 font-weight-bold text-primary">Modifier
+											utilisateur</h6>
+									</div>
+									<div class="card-body">
+										<form>
+											<div class="form-group row">
+												<label for="firstname" class="col-md-2 col-form-label">Seach</label>
+												<div class="col-md-10">
+													<input type="text" class="form-control" list="utilisateurs" id="updatefilter"name="utilisateur">
+												<datalist id="utilisateurs">
+  												</datalist>
+												</div>
+												<label for="firstname" class="col-md-2 col-form-label">nom</label>
+												<div class="col-md-10">
+													<input type="text" class="form-control" id="utilisateurNom1"
+														placeholder="entrer le nom">
+												</div>
+												
+												<label for="lastname" class="col-md-2 col-form-label">PrÃ©nom</label>
+												<div class="col-md-10">
+													<input type="text" class="form-control" id="utilisateurPrenom1"
+														placeholder="entrer le prÃ©nom">
+												</div>
+											
+												<label for="exampleInputEmail2"
+													class="col-sm-2 col-form-label">Email address</label>
+												<div class="col-md-10">
+													<input type="email" class="form-control"
+														id="utilisateurEmail1" aria-describedby="emailHelp"
+														placeholder="Entrer lemail" disabled="true"><small id="emailHelp"
+														class="form-text text-muted">Nous ne partagerons
+														jamais votre email avec qui que ce soit.</small>
+												</div>
+											
+												<label for="exampleInputPassword1"
+													class="col-sm-2 col-form-label">Mot de passe</label>
+												<div class="col-md-10">
+													<input type="password" class="form-control"
+														id="utilisateurPassword1" placeholder="Mot de passe">
+												</div>
+													<div class="form-check form-check-inline">
+													<label class="form-check-label" for="inlineCheckbox1">cochez
+														ici si vous allez ajouter un admin</label><input
+														class="form-check-input" type="checkbox"
+														id="utilisateurType1" name="utilisateurType" value="ADMIN">
+
+												</div>
+												
+
+											</div>
+											<div class="modal-footer">
+												<button class="btn btn-secondary" type="button"
+													data-dismiss="modal">Cancel</button>
+												<button type="submit" class="btn btn-primary">Modifier</button>
+											</div>
+
+										</form>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="modal fade" id="suprimerutilisateur" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+
+								<div class="modal-body">
+									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">�</span>
+									</button>
+									<div class="card-header ">
+										<h6 class="m-0 font-weight-bold text-primary">Modifier
+											utilisateur</h6>
+									</div>
+									<div class="card-body">
+<div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_filter"><label>Search:<input  id="filter" type="search" class="form-control form-control-md" placeholder="" aria-controls="dataTable"></label><button id="getALlBooks" type="button" class="btn btn-primary">Search
+				All Books</button></div></div></div>
+  
+									<div class="table-responsive">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th scope="col">ID</th>
+													<th scope="col">Nom</th>
+													<th scope="col">Prenom</th>
+													<th scope="col">Email</th>
+													<th scope="col">Type utilisateur</th>
+													<th scope="col"></th>
+												</tr>
+											</thead>
+											<tbody id="utilisateurtable">
+												
+											
+											</tbody>
+										</table>
+										<div>
+										</div>
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="test"></div>
+				</div>
+			</div>
+			<!-- End of Content Wrapper -->
+			<!--  footer -->
+			<footer th:replace="fragments/footer :: footer"></footer>
+			<!--  end footer -->
+		</div>
+		<!-- End of Page Wrapper -->
+
+
+		<!-- Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
+		<div th:insert="fragments/js :: js"></div>
+		<!--  end Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
+		
+</body>
+
+</html>
