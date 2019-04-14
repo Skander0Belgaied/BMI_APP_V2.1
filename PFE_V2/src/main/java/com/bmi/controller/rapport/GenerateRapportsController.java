@@ -1,6 +1,7 @@
 package com.bmi.controller.rapport;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +35,8 @@ public class GenerateRapportsController {
 		      for (String itemId : itemIds) {
 		    	  filtersList.add(filterRepository.findByFilterId(Long.parseLong(itemId)));
 		      } 
-		      model.addAttribute("filtersList",filtersList);
+		      Iterator<Filter> filtersLists = filtersList.iterator();
+		      model.addAttribute("filtersList",filtersLists);
 		}else
 		{
 			model.addAttribute("filtersList",null);

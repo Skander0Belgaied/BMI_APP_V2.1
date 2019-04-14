@@ -1,24 +1,20 @@
 package com.bmi.controller.app;
 
-import java.security.Principal;
-import java.util.List;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 /*import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;*/
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DefaultPropertiesPersister;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bmi.app.entity.Utilisateur;
 import com.bmi.app.repository.UtilisateurRepository;
-import com.bmi.service.app.UtilisateurDetails;
 
 @Controller
 public class TestController {
@@ -41,10 +37,26 @@ public class TestController {
 	public String home() {
 		return "home";
 	}
-	@RequestMapping("/table")
+	@RequestMapping("/test")
+	@ResponseBody
 	public String test() {
-		return "tabetry";
+		/*try {
+		     // create and set properties into properties object
+		     Properties props = new Properties();
+		     props.setProperty("Prop1", "KESKES");
+		     
+		     props.setProperty("Prop3", "nooo pls");
+		     // get or create the file
+		     File f = new File("app-properties.properties");
+		     OutputStream out = new FileOutputStream( f );
+		     // write into it
+		     DefaultPropertiesPersister p = new DefaultPropertiesPersister();
+		     p.store(props, out, "Header COmment");
+		   } catch (Exception e ) {
+		    e.printStackTrace();
+		   }*/
 	      
+		return "done";
 	}
 	
 	

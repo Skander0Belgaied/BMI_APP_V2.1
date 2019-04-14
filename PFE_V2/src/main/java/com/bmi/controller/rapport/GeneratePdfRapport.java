@@ -107,7 +107,7 @@ public class GeneratePdfRapport {
 	}
 
 	/******************************************
-	*********** With JDBC Connection **********
+	****** With JDBC Connection Exemple *******
 	*******************************************/
 
 	Statement stmt = null;
@@ -187,6 +187,9 @@ public class GeneratePdfRapport {
 			// close(con);
 		}
 	}
+	/******************************************
+	****** With JDBC Connection  Works ********
+	*******************************************/
 	@Autowired
 	FilterRepository filterRepository;
 	@Autowired
@@ -195,7 +198,7 @@ public class GeneratePdfRapport {
 	EtatRepository etatRepository;
 	@GetMapping(path = "/GenerateRapport-pdf" )
 	@ResponseBody
-	void generateRapport(@RequestParam MultiValueMap<String, String> queryMap,HttpServletResponse response,HttpServletRequest request)throws Exception {
+	void /* String*/ generateRapport(@RequestParam MultiValueMap<String, String> queryMap,HttpServletResponse response,HttpServletRequest request)throws Exception {
 		response.setContentType( "application/pdf" );
 		Map<String, Object> hashmap = new HashMap<String, Object>();
 		
@@ -206,7 +209,8 @@ public class GeneratePdfRapport {
 			filtersList.add(filterRepository.findByFilterId(etat.getEtatId().getFilterId()));
 		}
 		/******************************************************************/
-		String where="where 1=1 ";
+		String where="where 1=1 AND ";
+		String operatorLogique=" AND ";
 		int i=0;
 		if(request.getQueryString().contains("input-filters")){
 			List<String> itemIds=queryMap.get("input-filters");}
@@ -215,23 +219,55 @@ public class GeneratePdfRapport {
 			if(request.getQueryString().contains("input-filters"))
 			{	
 				if(queryMap.get("input-filters").contains(String.valueOf(filter.getFilterId()))) {
+					if(request.getQueryString().contains("operatorLogique_"+filter.getFilterChamp())) {
+						if((queryMap.get("operatorLogique_"+filter.getFilterChamp()).get(0)).equals("OR")) {
+						operatorLogique=" OR ";
+						}else
+						{
+							operatorLogique=" AND ";
+						}
+					}
+					else
+					{
+						operatorLogique="";
+					}
+						
 				hashmap.put(filter.getFilterChamp(),queryMap.get(queryMap.get("input-filters").get(i)).get(0));
-				where+="and "+filter.getFilterChamp()+"='"+queryMap.get(queryMap.get("input-filters").get(i)).get(0)+"'";
+				
+				if((queryMap.get("operator_"+filter.getFilterChamp()).get(0)).equals("like%")) {
+					
+					where+=filter.getFilterChamp()+" LIKE '"+queryMap.get(queryMap.get("input-filters").get(i)).get(0)+"%'";
+					}
+				else if((queryMap.get("operator_"+filter.getFilterChamp()).get(0)).equals("%like%")) {
+					where+=filter.getFilterChamp()+" LIKE '%"+queryMap.get(queryMap.get("input-filters").get(i)).get(0)+"%'";
+					}
+				else if((queryMap.get("operator_"+filter.getFilterChamp()).get(0)).equals("%like")) {
+					where+=filter.getFilterChamp()+" LIKE '%"+queryMap.get(queryMap.get("input-filters").get(i)).get(0)+"'";
+					}else
+					{
+						where+=filter.getFilterChamp()+" ='"+queryMap.get(queryMap.get("input-filters").get(i)).get(0)+"'";
+					}
+				if(queryMap.get("input-filters").size()!=i ) {
+					
+					where+=operatorLogique;
+			
+				}
 				i++;
 			}else
-			{	
+			{		
 				hashmap.put(filter.getFilterChamp(),"ALL");
 			}
 			}
 			else 
 			{
+				where="where 1=1";
 				hashmap.put(filter.getFilterChamp(),"ALL");
 			}
 			
 		}
 		
 		hashmap.put("where", where);
-		
+		//return where;
 		String RapportUrl=rapportRepository.findByRapportId(Long.parseLong(queryMap.get("rapportId").get(0))).getRapportUrl();
 
 		 try {
