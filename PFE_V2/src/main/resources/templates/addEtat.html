@@ -1,7 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+  		function add() {
+  		
+  			  	var  newdiv=$('#addfilter').parent().parent()[0].outerHTML;
+  			$('#addfilter').parent().parent().before("<hr class='mb-4' id='hr'>");
+  			$('#addfilter').parent().replaceWith("<div class='col-md-2 mb-2'><button type='button' name='deletefilter' id='deletefilter' class='btn btn-danger btn-circle' onclick='supp(this);'><i class='material-icons' style='color:white'>delete_forever</i></button></div>");
+  			$('#hr').before(newdiv);
+  			}
+  		function supp(e)
+  		{			console.log($(e).val());
+  					$(e).parent().parent().prev().remove();
+  			    	$(e).parent().parent().remove();
+  		}
+
+  			
+
+  </script>
 
 <head>
 <title></title>
@@ -43,37 +64,26 @@
                   <h6 class="m-0 font-weight-bold text-primary">Ajoout d'une Etat</h6>
                 </div>
                 <div class="card-body">
-                <form class="needs-validation" method="post" action="/upload" enctype="multipart/form-data" novalidate="">
+                <form class="needs-validation" method="post" action="/upload" enctype="multipart/form-data" >
             <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-4 mb-3 ">
                 <label for="firstName">Rapport name</label>
-                <input type="text" class="form-control" id="rapportName" placeholder="" required>
+                <input type="text" class="form-control" id="rapportName" placeholder="rapport Stock" required>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
               
-            </div>
-
             
-
-            
-
-            
-
-            
-
-            <div class="row">
-              <div class="col-md-12 mb-3">
+              <div class="col-md-4 mb-3 offset-md-2">
                 <label for="country">Sujet</label>
-                <select class="custom-select d-block w-100" id="Sujet" required=true>
-                  <option value="">DEPENCE...</option>
-                  <option value="">STOCK...</option>
-                  <option>United States</option>
+                <select class="custom-select d-block w-100 animated--grow-in" id="sujet" required>
+                  <option value="ACHAT" selected>Achat</option>
+                  <option value="STOCK">Stock</option>
+                  <option value="DEPENCE">Depence</option>
+                  <option value="TRAVAUX">Travaux</option>
+                  <option value="TEMPS">Temps</option>
                 </select>
-                <div class="invalid-feedback">
-                  Sélectionnez le sujet du rapport .
-                </div>
               </div>
                
               
@@ -87,47 +97,32 @@
                 </div>
                 <div class="card-body">
                 	 <div class="row">
-            <div class="custom-control custom-checkbox col-md-3 mb-2">
-              <input type="checkbox" class="custom-control-input" id="f1">
-              <label class="custom-control-label" for="f1">filter date</label>
+Nom Du Filter
+            <div class="col-md-2 mb-2">
+             <input type="text" name="filterNom" class="form-control"  placeholder="Filter Date" required>
             </div>
-            <div class="custom-control custom-checkbox col-md-3 mb-2">
-            	 
-              <input type="checkbox" class="custom-control-input" id="f2">
-             <label class="custom-control-label" for="f2">filter departement</label>
+Champ Du Filter
+              <div class=" col-md-2 mb-2">
+             		<input type="text" name="filterChamp" placeholder="ST_DATEFIN" class="form-control" required>
             </div>
-            <div class="custom-control custom-checkbox col-md-3 mb-2">
-            	
-              <input type="checkbox" class="custom-control-input" id="f3">
-              <label class="custom-control-label" for="f3">filter date</label>
+          Type Filter
+              <div class="col-md-2 mb-2">
+             <select name="filterType" class="form-control" required>
+             	<option value="text" selected >text</option>
+             	<option value="number">number</option>
+             </select>
             </div>
-            <div class="custom-control custom-checkbox col-md-3 mb-2">
-            	 
-              <input type="checkbox" class="custom-control-input" id="f4">
-              <label class="custom-control-label" for="f4">filter departement</label>
-             
-            </div>
-            <div class="custom-control custom-checkbox col-md-3 mb-2">
-              <input type="checkbox" class="custom-control-input" id="f1">
-              <label class="custom-control-label" for="f1">filter date</label>
-            </div>
-            <div class="custom-control custom-checkbox col-md-3 mb-2">
-            	 
-              <input type="checkbox" class="custom-control-input" id="f2">
-             <label class="custom-control-label" for="f2">filter departement</label>
-            </div>
-            <div class="custom-control custom-checkbox col-md-3 mb-2">
-            	
-              <input type="checkbox" class="custom-control-input" id="f3">
-              <label class="custom-control-label" for="f3">filter date</label>
-            </div>
-            <div class="custom-control custom-checkbox col-md-3 mb-2">
-            	 
-              <input type="checkbox" class="custom-control-input" id="f4">
-              <label class="custom-control-label" for="f4">filter departement</label>
-             
+              <div class="col-md-2 mb-2">
+           
+                	 	<button type="button" name="addfilter" id="addfilter" class="btn btn-success btn-circle" onclick="add()" ><i class="material-icons"  style='color:white'>add</i></button>
             </div>
         </div>
+       
+ 
+
+
+
+
         </div>
     </div>
     </div>
@@ -161,7 +156,7 @@
           </div>
 
         </div>
-			
+		
 			<script th:if="${status} != null" th:inline="javascript">
      
          var message = /*[[${status}]]*/ 'default';   
