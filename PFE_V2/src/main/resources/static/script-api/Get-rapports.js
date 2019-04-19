@@ -60,7 +60,7 @@ function getallrapports(sujet)
 			if (result.status == "success") {
 				$.each(result.data,
 						function(i, rapports) {
-				var options="<option value='"+rapports.rapportid+"'>"+rapports.rapportNom+"</option>"
+				var options="<option value='"+rapports.rapportId+"'>"+rapports.rapportNom+"</option>"
 				$('#selectrapport').append(options);
 						});
 				console.log("Success: ", result);

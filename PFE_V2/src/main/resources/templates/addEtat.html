@@ -5,6 +5,7 @@
       rel="stylesheet">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script th:src="@{~/script-api/Get-filters.js}"></script>
   <script type="text/javascript">
 
   		function add() {
@@ -13,6 +14,7 @@
   			$('#addfilter').parent().parent().before("<hr class='mb-4' id='hr'>");
   			$('#addfilter').parent().replaceWith("<div class='col-md-2 mb-2'><button type='button' name='deletefilter' id='deletefilter' class='btn btn-danger btn-circle' onclick='supp(this);'><i class='material-icons' style='color:white'>delete_forever</i></button></div>");
   			$('#hr').before(newdiv);
+
   			}
   		function supp(e)
   		{			console.log($(e).val());
@@ -21,6 +23,25 @@
   		}
 
   			
+  		function addDisponible() {
+  		
+  			  	var  newdiv=$('#addFilterDisponible').parent().parent()[0].outerHTML;
+  			$('#addFilterDisponible').parent().parent().before("<hr class='mb-4' id='hr2'>");
+  			$('#addFilterDisponible').parent().replaceWith("<div class='col-md-2 mb-2'><button type='button' name='deletefilter' id='deletefilter' class='btn btn-danger btn-circle' onclick='supp(this);'><i class='material-icons' style='color:white'>delete_forever</i></button></div>");
+  			$('#hr2').before(newdiv);
+  			var champfilter=$('#hr').prev().children().children().children().attr('champfilter');
+			$('#hr2').prev().children().next().children().val(champfilter)
+  			}
+  		function supp(e)
+  		{			console.log($(e).val());
+  					$(e).parent().parent().prev().remove();
+  			    	$(e).parent().parent().remove();
+  		}
+		function changeinput(e)
+		{
+			var champfilter=$('option:selected', e).attr('champfilter');
+			$(e).parent().next().children().val(champfilter);
+		}
 
   </script>
 
@@ -61,23 +82,23 @@
               <!-- Basic Card Example -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Ajoout d'une Etat</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Ajout d'une Etat</h6>
                 </div>
                 <div class="card-body">
                 <form class="needs-validation" method="post" action="/upload" enctype="multipart/form-data" >
             <div class="row">
               <div class="col-md-4 mb-3 ">
-                <label for="firstName">Rapport name</label>
-                <input type="text" class="form-control" id="rapportName" placeholder="rapport Stock" required>
-                <div class="invalid-feedback">
-                  Valid first name is required.
-                </div>
+                <label for="rapportid">Identifiant Du Rapport</label>
+                <input type="number" class="form-control" id="rapportid" name="rapportid"placeholder="rapport Stock" required>
               </div>
-              
+              <div class="col-md-4 mb-3 ">
+                <label for="rapportName">Nom Du Rapport</label>
+                <input type="text" class="form-control" id="rapportName" name="rapportName"placeholder="rapport Stock" required>
+              </div>
             
-              <div class="col-md-4 mb-3 offset-md-2">
-                <label for="country">Sujet</label>
-                <select class="custom-select d-block w-100 animated--grow-in" id="sujet" required>
+              <div class="col-md-4 mb-3 ">
+                <label for="sujet">Sujet</label>
+                <select class="custom-select d-block w-100 animated--grow-in" id="sujet" name="sujet"required>
                   <option value="ACHAT" selected>Achat</option>
                   <option value="STOCK">Stock</option>
                   <option value="DEPENCE">Depence</option>
@@ -110,11 +131,13 @@ Champ Du Filter
              <select name="filterType" class="form-control" required>
              	<option value="text" selected >text</option>
              	<option value="number">number</option>
+             	<option value="date">Date</option>
              </select>
             </div>
               <div class="col-md-2 mb-2">
            
                 	 	<button type="button" name="addfilter" id="addfilter" class="btn btn-success btn-circle" onclick="add()" ><i class="material-icons"  style='color:white'>add</i></button>
+                	 	<button type='button' name='deletefilter' id='deletefilter' class='btn btn-danger btn-circle' onclick='supp(this);'><i class='material-icons' style='color:white'>delete_forever</i></button> 
             </div>
         </div>
        
@@ -127,7 +150,37 @@ Champ Du Filter
     </div>
     </div>
         </div>
-            <hr class="mb-4">
+            
+            <div class="row">
+            	<div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">filters disponible</h6>
+                </div>
+                <div class="card-body">
+                	 <div class="row"  >
+						Nom Du Filter
+           			 <div class="col-md-3 mb-2">
+             			<select name="filtersDisponible" class="form-control" placeholder="Filter Date" required="" id="filters" onchange="changeinput(this)">
+       
+             			</select>
+           			 </div>	Champ Du Filter
+           			 <div class="col-md-3 mb-2" id="filterschamps">
+             			<input type="text" name="filterNom" class="form-control" placeholder="Filter Date" disabled>
+           			 </div>
+              <div class="col-md-3 mb-2">
+           
+                	 	<button type="button" name="addFilterDisponible" id="addFilterDisponible" class="btn btn-success btn-circle" onclick="addDisponible()"><i class="material-icons" style="color:white">add</i></button>
+                	 	<button type='button' name='deletefilter' id='deletefilter' class='btn btn-danger btn-circle' onclick='supp(this);'><i class='material-icons' style='color:white'>delete_forever</i></button>
+            </div>
+          
+
+        </div>
+        </div>
+    </div>
+    </div>
+        </div>
+        <hr class="mb-4">
 
                <div class="custom-file">
     <input type="file" class="custom-file-input" id="validatedCustomFile"  name="file" required>

@@ -23,7 +23,7 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid" id="page-content">
-					<div th:text="@{${status}}"></div>
+		
 					
 			</div>
 			<!-- End of Content Wrapper -->
@@ -37,7 +37,7 @@
 <script th:if="${status} != null" th:inline="javascript">
      
          var message = /*[[${status}]]*/ 'default';   
-         swal("Error",message,"success");
+         swal("success",message,"success");
       </script>
 
 		<!-- Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->

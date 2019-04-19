@@ -27,7 +27,7 @@ public class Etat implements Serializable {
 	}
 
 	public void setEtatId(EtatId etatId) {
-		etatId = etatId;
+		this.etatId = etatId;
 	}
 
 	

@@ -9,5 +9,5 @@ import com.bmi.app.entity.Filter;
 public interface FilterRepository extends JpaRepository<Filter, Long> {
 	
 	Filter findByFilterId(Long filterId);
-
+	List<Filter> findByFilterNom(String filterNom);
 }

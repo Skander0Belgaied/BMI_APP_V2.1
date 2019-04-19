@@ -12,10 +12,8 @@ public class Filter implements Serializable {
 	private Long filterId;
 	@Column(name="filter_nom",unique=true)
 	private String filterNom;
-	@Column(name="filter_champ",unique=true)
+	@Column(name="filter_champ")
 	private String filterChamp;
-	@Column(name="filter_sql")
-	private String filterSql;
 	@Column(name="filter_type",columnDefinition="varchar(255) default 'text'")
 	private String filterType;
 	
@@ -28,12 +26,12 @@ public class Filter implements Serializable {
 
 
 
-	public Filter(Long filterId, String filterNom, String filterChamp, String filterSql, String filterType) {
+	public Filter(Long filterId, String filterNom, String filterChamp, String filterType) {
 		super();
 		this.filterId = filterId;
 		this.filterNom = filterNom;
 		this.filterChamp = filterChamp;
-		this.filterSql = filterSql;
+		
 		this.filterType = filterType;
 	}
 
@@ -74,16 +72,6 @@ public class Filter implements Serializable {
 	}
 
 
-
-	public String getFilterSql() {
-		return filterSql;
-	}
-
-
-
-	public void setFilterSql(String filterSql) {
-		this.filterSql = filterSql;
-	}
 
 
 

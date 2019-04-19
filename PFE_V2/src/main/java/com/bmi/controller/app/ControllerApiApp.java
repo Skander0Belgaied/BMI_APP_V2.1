@@ -218,5 +218,20 @@ public class ControllerApiApp {
 
 		 return new ResponseEntity<Object>(response, HttpStatus.OK);
 	}
+	/****************************************
+	 * >BEGIN get all filter for a rapport<**
+	 ****************************************/
+
+	@GetMapping(path = { "/AllFilters" })
+	public ResponseEntity<Object> getAllFillters() {
+
+		List<Filter> filtersList = new ArrayList<Filter>();
+		filtersList=filterRepository.findAll();
+		ServicerResponseApi response = new ServicerResponseApi();
+		response.setData(filtersList);
+		response.setStatus("success");
+
+		 return new ResponseEntity<Object>(response, HttpStatus.OK);
+	}
 
 }
