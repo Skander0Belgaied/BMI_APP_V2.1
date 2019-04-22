@@ -35,7 +35,7 @@
                   <div th:each="filter : ${filtersList}">
                   	  <div class="form-row form-group" th:if="${filter.filterType} != date" >
                          <div class="col-sm-2 form-group">
-                    <label class="col-form-label" for="exampleFormControlSelect1" th:text="@{${filter.filterNom}}">select sujet</label>
+                    <label class="col-form-label" for="exampleFormControlSelect1" th:text="@{${filter.filterNom}+' :'}">select sujet</label>
                     </div>
                      <div class="col-sm-2">
                     <select th:name="@{operator_+${filter.filterChamp}}" class="form-control" required>
@@ -48,6 +48,22 @@
              <input th:type="@{${filter.filterType}}"  th:name="@{${filter.filterId}}" th:id="@{${filter.filterNom}}" class="form-control" required>
             </div>
            </div>
+
+	  <div class="form-group row" th:if="${filter.filterType} == date" >
+                         <div class="col-sm-2 form-group">
+                    <label class="col-form-label" for="exampleFormControlSelect1" th:text="@{${filter.filterNom}+' :'}">select sujet</label>
+                    </div>
+                     <div class="col-sm-3">
+              <input th:type="@{${filter.filterType}}"  th:name="@{${filter.filterId}}" th:id="@{${filter.filterNom}}" class="form-control" required> 
+            </div>
+            <label class="col-sm-1 col-form-label" for="exampleFormControlSelect1" >à</label>
+              <div class="col-sm-3">
+            <input th:type="@{${filter.filterType}}"  th:name="@{${filter.filterId}}" th:id="@{${filter.filterNom}}" class="form-control" required> 
+            </div>
+           </div>
+
+
+
             <div class="form-row form-group">
             <div class="col-sm-3 offset-sm-4">
               <select th:if="@{${filtersList.hasNext()}}" th:name="@{operatorLogique_+${filter.filterChamp}}" class="form-control" required>
