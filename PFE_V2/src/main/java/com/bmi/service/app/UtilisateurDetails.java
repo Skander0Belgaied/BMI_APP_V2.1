@@ -1,7 +1,9 @@
 package com.bmi.service.app;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,8 +13,7 @@ import com.bmi.app.entity.Utilisateur;
 public class UtilisateurDetails implements UserDetails {
 	
 	Utilisateur utilisateur;
-	
-
+	String ROLE_PREFIX = "ROLE_";
 
 
 	public UtilisateurDetails(Utilisateur utilisateur) {
@@ -27,14 +28,21 @@ public class UtilisateurDetails implements UserDetails {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
+	@Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 
+        list.add(new SimpleGrantedAuthority(ROLE_PREFIX + utilisateur.getUtilisateurType()));
+
+        return list;
+    }/*
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
 		return Collections.singleton(new SimpleGrantedAuthority("USER"));
 		
 	}
-
+*/
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub

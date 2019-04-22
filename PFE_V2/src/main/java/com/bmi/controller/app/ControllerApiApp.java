@@ -26,12 +26,15 @@ import com.bmi.app.repository.UtilisateurRepository;
 import com.bmi.rapport.entity.Bmiequ;
 import com.bmi.rapport.repository.BmiequRepository;
 import com.bmi.service.app.ServicerResponseApi;
+import com.bmi.service.app.UtilisateurServiceImpl;
 
 @RestController
 public class ControllerApiApp {
 //-------------------> JPA DataBase App 
 	@Autowired
 	UtilisateurRepository utilisateurRepository;
+	@Autowired
+	UtilisateurServiceImpl utilisateurServiceImpl;
 //-------------------> JPA DataBase Repport
 	@Autowired
 	BmiequRepository bmiequRepository;
@@ -46,7 +49,7 @@ public class ControllerApiApp {
 		if (utilisateur.getUtilisateurType() == null) {
 			utilisateur.setUtilisateurType("USER");
 		}
-		utilisateurRepository.save(utilisateur);
+		utilisateurServiceImpl.createUtilisateur(utilisateur);
 		ServicerResponseApi response = new ServicerResponseApi();
 		response.setData(null);
 		response.setStatus("success");

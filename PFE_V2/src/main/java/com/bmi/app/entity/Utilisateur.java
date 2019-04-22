@@ -72,6 +72,10 @@ public class Utilisateur implements Serializable {
 		this.utilisateurType = utilisateurType;
 	}
 
+	public Object match(String name, String password) {
+		  return this.utilisateurEmail.equals(name) && this.utilisateurPassword.equals(password);
+	}
+
 	
 
 }

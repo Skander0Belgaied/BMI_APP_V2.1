@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bmi.app.entity.Utilisateur;
@@ -14,10 +15,14 @@ import com.bmi.app.repository.UtilisateurRepository;
 public class UtilisateurServiceImpl implements UtiliasateurService {
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
-	public Utilisateur createUtilisateur(Utilisateur utilisateur) {
-		return utilisateurRepository.save(utilisateur);
+	public void createUtilisateur(Utilisateur utilisateur) {
+		final String pwd=utilisateur.getUtilisateurPassword();
+		utilisateur.setUtilisateurPassword(bCryptPasswordEncoder.encode(pwd));
+		 utilisateurRepository.save(utilisateur);
 	}
 
 	@Override

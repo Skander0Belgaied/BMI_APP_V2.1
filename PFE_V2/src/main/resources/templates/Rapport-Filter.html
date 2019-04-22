@@ -33,7 +33,7 @@
                  <div th:if="${filtersList} != null">
 
                   <div th:each="filter : ${filtersList}">
-                  	  <div class="form-row form-group" >
+                  	  <div class="form-row form-group" th:if="${filter.filterType} != date" >
                          <div class="col-sm-2 form-group">
                     <label class="col-form-label" for="exampleFormControlSelect1" th:text="@{${filter.filterNom}}">select sujet</label>
                     </div>

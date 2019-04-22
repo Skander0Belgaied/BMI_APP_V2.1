@@ -1,0 +1,151 @@
+<html  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title></title>
+<link rel="stylesheet" type="text/css" th:href="@{css/Profile.css}">
+<div th:replace="fragments/head :: head"></div>
+</head>
+
+<body id="page-top">
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<!--  sidebar -->
+		<div th:insert="fragments/sidebar :: sidebar"></div>
+		<!--  end sidebar -->
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<!-- Main Content -->
+			<div id="content">
+				<!--  topbar -->
+				<div th:insert="fragments/topbar :: topbar"></div>
+				<!--  end topbar -->
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid" id="page-content">
+				<div class="col-md-8 col-12 mr-auto ml-auto">
+            <!--      Wizard container        -->
+            <div class="wizard-container">
+              <div class="card card-wizard active" data-color="rose" id="wizardProfile">
+               
+                  <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+                  <div class="card-header text-center">
+                    <h3 class="card-title">
+                      Construisez votre profil
+                    </h3>
+                    <h5 class="card-description">Cette information nous permettra d'en savoir plus sur vous.</h5>
+                  </div>
+                  <div class="wizard-navigation">
+                    <ul class="nav nav-pills">
+                    	   <li class="nav-item" style="width: 50%;">
+                        <a class="nav-link show active" href="#account" data-toggle="tab" role="tab" aria-selected="false">
+							Compte
+                        </a>
+                      </li>
+                      <li class="nav-item" style="width:50%;">
+                        <a class="nav-link show" href="#about" data-toggle="tab" role="tab" aria-selected="true">   
+							Sécurité et connexion
+                        </a>
+                      </li>
+                   
+                      
+                    </ul>
+                
+                  <div class="card-body">
+                    <div class="tab-content">
+                      <div class="tab-pane show" id="about">
+                          <h5 class="info-text"> Changez votre mot de passe </h5>
+                     <hr>                       
+                     <form method="post" action="/changePassword" class="user">
+                <div class="form-group row" sec:authorize="hasRole('ROLE_ADMIN')">
+                  <div class="col-sm-12 mb-3 mb-sm-0">
+                     <br> 
+                  </div>
+                  <div class="col-sm-12 mb-3 mb-sm-0">
+                     <label for="changePassword">Nouveau mot de passe</label>
+                    <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Nouveau mot de passe"  required>
+                  </div>
+                  <div class="col-sm-12 mb-3 mb-sm-0">
+                     <br>
+                  </div>
+                  <div class="col-sm-12 mb-3 mb-sm-0">
+                       <label for="cpassword">Confirmez le mot de passe</label>
+                    <input type="password" class="form-control form-control-user" id="cpassword" name="password" placeholder="Confirmez le mot de passe" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4 offset-sm-4 mb-3 mb-sm-0">
+                   <input type="submit" class="btn btn-success  btn-user btn-block" value="Mettre à jour les informations">
+                  </div>
+                
+                </div>
+                
+              </form>
+                      </div>
+                      <div class="tab-pane show active" id="account">
+                        <h5 class="info-text"> Données personnelles </h5>
+                     <hr>
+					<form method="post" action="/updateProfile" class="user">
+                <div class="form-group row">
+                   <div class="col-sm-12 mb-3 mb-sm-0">
+                     <br>
+                     <br>
+                  </div>
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" name="Prenom" id="exampleFirstName" placeholder="Prénom" th:value="${user.getUtilisateurPrenom()}" required>
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-user" name="Nom" id="exampleLastName" placeholder="Nom De Famille" th:value="${user.getUtilisateurNom()}"required>
+                  </div>
+                </div>
+                 <div class="col-sm-12 mb-3 mb-sm-0">
+                     <br> 
+                  </div>
+
+                <div class="form-group">
+                  <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Adresse Email"  th:value="${user.getUtilisateurEmail()}"disabled>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4 offset-sm-4 mb-3 mb-sm-0">
+                   <input type="submit" class="btn btn-success  btn-user btn-block" value="Mettre à jour les informations">
+                  </div>
+                
+                </div>
+                
+              </form>
+
+
+                      </div>
+                    </div>
+                  </div>
+                 <!-- <div class="card-footer">
+                    
+                    
+                    <div class="clearfix"></div>
+                  </div>-->
+               
+              </div>
+            </div>
+            <!-- wizard container -->
+          </div>
+					
+			</div>
+			<!-- End of Content Wrapper -->
+			<!--  footer -->
+			<footer th:replace="fragments/footer :: footer"></footer>
+			<!--  end footer -->
+		</div>
+		<!-- End of Page Wrapper -->
+	</div>
+</div>	
+<script th:if="${status} != null" th:inline="javascript">
+     
+         var message = /*[[${status}]]*/ 'default';   
+         swal("succès",message,"success");
+      </script>
+
+		<!-- Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
+		<div th:insert="fragments/js :: js"></div>
+		<!--  end Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
+		
+</body>
+
+</html>

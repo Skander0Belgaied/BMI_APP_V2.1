@@ -115,7 +115,7 @@ public class UploadController {
 		 }
 			 FilterRepository.saveAll(filters);
 			 rapportRepository.save(rapport);
-			 if(getform.containsKey("filterNom")) {
+			 if(getform.containsKey("filterNom")||getform.containsKey("filtersDisponible")) {
 			 for(Filter f:filters){
 			 EtatId etatID=new EtatId(sujet,f.getFilterId(),rapportid);
 				Etat e=new Etat();

@@ -63,17 +63,11 @@ public class TestController {
 		return "cfguser2";
 	}
 	
-	@RequestMapping("/form")
+	@RequestMapping("/profile")
 	public String form() {
 
-		return "testform";
+		return "profile";
 	}
 	
-	@GetMapping("/testform")
-	public String testform(@RequestParam MultiValueMap<String, String> queryMap,HttpServletRequest req) {
-		for(int i = 0;i<queryMap.get("b").size();i++) {
-		System.out.println(queryMap.get("b").get(i));
-		}
-		return "testform";
-	}
+
 }

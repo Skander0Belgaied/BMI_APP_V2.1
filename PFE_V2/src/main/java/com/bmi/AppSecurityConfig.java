@@ -1,7 +1,5 @@
 package com.bmi;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
@@ -17,8 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.bmi.app.entity.Utilisateur;
 import com.bmi.app.repository.UtilisateurRepository;
+import com.bmi.service.app.UtilisateurDetails;
 import com.bmi.service.app.UtilisateurDetailsService;
 
 
@@ -28,12 +26,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter implements H
 	
 	@Autowired
 	private UtilisateurDetailsService utilisateurDetailsService;
+
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
-@Override
-	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		List<Utilisateur> users =utilisateurRepository.findAll();
-		System.out.println("je suis ici");
+	/*	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception
+	{
+		/*List<Utilisateur> users =utilisateurRepository.findAll();
 		 for (Utilisateur user : users) {
 	        auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
 	                .withUser(user.getUtilisateurEmail())
@@ -41,7 +40,34 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter implements H
 	                    	.roles(user.getUtilisateurType());
 	            
 	    }
-	   }
+		auth.authenticationProvider(authProvider());
+	}*/
+	@Autowired
+	public void configAuthentication(AuthenticationManagerBuilder auth)
+	        throws Exception {
+	    auth.userDetailsService(utilisateurDetailsService);
+
+	}
+	/*
+@Override
+	    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		List<Utilisateur> users =utilisateurRepository.findAll();
+		System.out.println("je suis ici \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		 for (Utilisateur user : users) {
+	        auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+	                .withUser(user.getUtilisateurEmail())
+	                    .password(user.getUtilisateurPassword())
+	                    	.roles(user.getUtilisateurType());
+	            
+	    }
+		 
+	   }*/
+
+@Bean
+public BCryptPasswordEncoder passwordEncoder() {
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    return bCryptPasswordEncoder;
+}
 	/*@Bean
 	public AuthenticationProvider authProvider()
 	{
@@ -55,7 +81,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter implements H
 		http
 		.csrf().disable()
 		.authorizeRequests().antMatchers("/login").permitAll()
-		//.antMatchers("/cfg-account").hasRole("ADMIN")
+		.antMatchers("/cfg-account").hasRole("ADMIN")
+		.antMatchers("/cfg-account/").hasRole("ADMIN")
 		.and()
 		.authorizeRequests()
 		.antMatchers("/css/**", "/js/**","/img/**","/scss/**","/vendor/**","/cfg-account/**").permitAll()

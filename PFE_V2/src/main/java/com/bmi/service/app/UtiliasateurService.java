@@ -7,7 +7,7 @@ import com.bmi.app.entity.Utilisateur;
 
 public interface UtiliasateurService {
 	
-	Utilisateur createUtilisateur(Utilisateur utilisateur);
+	void createUtilisateur(Utilisateur utilisateur);
 
 	Optional<Utilisateur> getUtilisateur(long id);
 

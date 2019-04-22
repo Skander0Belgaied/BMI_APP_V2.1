@@ -3,6 +3,55 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="equipmnt1" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f73747f-d6eb-429a-a706-a8ad5c10d82e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sqlserveur"/>
+	<subDataset name="Dataset1" uuid="4b00d463-6acd-4850-8b6d-0ac8c2853f35">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sqlserveur"/>
+		<queryString language="SQL">
+			<![CDATA[select * from vper_bmiequ]]>
+		</queryString>
+		<field name="ST_DES_EQU" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ST_DES_EQU"/>
+		</field>
+		<field name="Duree_arret" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="Duree_arret"/>
+		</field>
+		<field name="Total_matiere" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="Total_matiere"/>
+		</field>
+		<field name="Total_exterieur" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="Total_exterieur"/>
+		</field>
+		<field name="Total_main_oeuvre" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="Total_main_oeuvre"/>
+		</field>
+		<field name="Total_cout" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="Total_cout"/>
+		</field>
+		<field name="ST_CODCOU" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ST_CODCOU"/>
+		</field>
+		<group name="ST_DES_EQU">
+			<groupExpression><![CDATA[$F{ST_DES_EQU}]]></groupExpression>
+		</group>
+		<group name="Duree_arret">
+			<groupExpression><![CDATA[$F{Duree_arret}]]></groupExpression>
+		</group>
+		<group name="Total_matiere">
+			<groupExpression><![CDATA[$F{Total_matiere}]]></groupExpression>
+		</group>
+		<group name="Total_exterieur">
+			<groupExpression><![CDATA[$F{Total_exterieur}]]></groupExpression>
+		</group>
+		<group name="Total_main_oeuvre">
+			<groupExpression><![CDATA[$F{Total_main_oeuvre}]]></groupExpression>
+		</group>
+		<group name="Total_cout">
+			<groupExpression><![CDATA[$F{Total_cout}]]></groupExpression>
+		</group>
+		<group name="ST_CODCOU">
+			<groupExpression><![CDATA[$F{ST_CODCOU}]]></groupExpression>
+		</group>
+	</subDataset>
 	<parameter name="where" class="java.lang.String"/>
 	<parameter name="groupby" class="java.lang.String"/>
 	<parameter name="ST_CODLON_EQU" class="java.lang.String"/>
@@ -26,6 +75,7 @@
       ,[Total_main_oeuvre]
       ,[Total_cout]
       ,[Date_intervention]
+      ,[ST_CODCOU]
       ,(select sum(Total_cout) from VPER_BMIEQU   $P!{where} )as Total
   FROM [MAINTA_TEST].[dbo].[VPER_BMIEQU] $P!{where}
   ORDER BY [Total_cout] DESC]]>
@@ -44,6 +94,9 @@
 	</field>
 	<field name="ST_DES_EQU" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="ST_DES_EQU"/>
+	</field>
+	<field name="ST_CODCOU" class="java.lang.String">
+		<property name="property.name" value="ST_CODCOU"/>
 	</field>
 	<field name="ID_CODCAT_CAT" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="ID_CODCAT_CAT"/>
@@ -213,7 +266,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="51" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<staticText>
 				<reportElement x="100" y="0" width="531" height="30" uuid="de37eeb7-1019-4239-8cb6-94d77b3f6ab2"/>
 				<box>
@@ -257,15 +310,6 @@
 				<text><![CDATA[Des EQU]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="37" width="60" height="13" uuid="246362e2-baed-4320-8b2c-e9eda97d553f">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62f8690f-3833-44b6-a993-f2941fba2f58"/>
-				</reportElement>
-				<box topPadding="0" leftPadding="21" bottomPadding="0" rightPadding="0">
-					<pen lineWidth="0.0" lineStyle="Double" lineColor="#0600A8"/>
-				</box>
-				<text><![CDATA[Code long]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="561" y="37" width="55" height="13" uuid="3b2d1e46-0445-42e1-8a9c-187028bc822c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62f8690f-3833-44b6-a993-f2941fba2f58"/>
 				</reportElement>
@@ -279,11 +323,11 @@
 				<text><![CDATA[Duree_arret]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="333" y="36" width="65" height="15" uuid="669b4b00-017a-4633-95f1-2767fa011e67"/>
+				<reportElement x="333" y="36" width="65" height="14" uuid="669b4b00-017a-4633-95f1-2767fa011e67"/>
 				<text><![CDATA[Total_matiere]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="403" y="36" width="70" height="15" uuid="c18d5b38-d2f0-4376-aa32-3cc2af67a2ce"/>
+				<reportElement x="403" y="36" width="70" height="14" uuid="c18d5b38-d2f0-4376-aa32-3cc2af67a2ce"/>
 				<text><![CDATA[Total_exterieur]]></text>
 			</staticText>
 			<staticText>
@@ -294,10 +338,14 @@
 				<reportElement x="481" y="37" width="70" height="13" uuid="8c6b3c05-d4c0-4e2f-8d98-667250047b0b"/>
 				<text><![CDATA[Total_Cout]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="-10" y="37" width="73" height="13" uuid="94287e13-8c85-4e36-b5d7-bb10d2d51061"/>
+				<text><![CDATA[ST_CODCOU]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="32" splitType="Stretch">
+		<band height="25" splitType="Stretch">
 			<textField>
 				<reportElement x="481" y="2" width="70" height="18" uuid="f4e5a28f-3ae1-494d-958b-68ceecf4d9e0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62f8690f-3833-44b6-a993-f2941fba2f58"/>
@@ -317,7 +365,7 @@
 				<textFieldExpression><![CDATA[$V{cumulé}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="72" y="2" width="86" height="30" uuid="1921ea71-fb0c-4c08-a2b9-a34673f3017d"/>
+				<reportElement x="72" y="2" width="86" height="22" uuid="1921ea71-fb0c-4c08-a2b9-a34673f3017d"/>
 				<textFieldExpression><![CDATA[$F{ST_DES_EQU}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -336,9 +384,17 @@
 				<reportElement x="239" y="2" width="86" height="18" uuid="657d9162-c3a4-4028-a64d-8910fc9dfbd3"/>
 				<textFieldExpression><![CDATA[$F{Total_main_oeuvre}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="-10" y="2" width="73" height="18" uuid="75b28e7f-a5c6-4ec9-8f57-5cd54e562680"/>
+				<textFieldExpression><![CDATA[$F{ST_CODCOU}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<summary>
-		<band height="44" splitType="Stretch"/>
+		<band height="47" splitType="Stretch">
+			<break>
+				<reportElement x="0" y="10" width="789" height="1" uuid="9fb0f89c-26ce-4962-8907-9691e9b5b606"/>
+			</break>
+		</band>
 	</summary>
 </jasperReport>
