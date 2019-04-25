@@ -8,6 +8,25 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+.bg-gradient-private-color1 {
+    background-color: #0d39b8;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #4e73df), to(#224abe));
+    background-image: linear-gradient(-95deg, #1e2a4a 10%, #104dff 80%);
+    background-size: cover;
+}/*
+.bg-gradient-private-color1 {
+    background-color: #0d39b8;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #4e73df), to(#224abe));
+    background-image: linear-gradient(180deg, #104dff 10%, #1e2a4a 100%);
+    background-size: cover;
+}*/
+.bg-gradient-private-color2 {
+    background-color: #0d39b8;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #4e73df), to(#224abe));
+    background-image: linear-gradient(180deg, #21252f 10%, #104dff 100%);
+    background-size: cover;
+}
 :root { -
 	-blue: #4e73df; -
 	-indigo: #6610f2; -
@@ -10307,23 +10326,28 @@ opacity
 }
 
 .border-left-primary {
-	border-left: .25rem solid #4e73df !important
+	border-left: .25rem solid #4e73df !important;
+	border-right: .25rem solid #4e73df !important;
 }
 
 .border-left-success {
-	border-left: .25rem solid #1cc88a !important
+border-right: .25rem solid #1cc88a !important;
+	border-left: .25rem solid #1cc88a !important;
 }
 
 .border-left-info {
-	border-left: .25rem solid #36b9cc !important
+	border-left: .25rem solid #36b9cc !important;
+	border-right:.25rem solid #36b9cc !important;
 }
 
 .border-left-warning {
-	border-left: .25rem solid #f6c23e !important
+	border-left: .25rem solid #f6c23e !important;
+	border-right:.25rem solid #f6c23e !important;
 }
 
 .border-left-danger {
-	border-left: .25rem solid #e74a3b !important
+	border-left: .25rem solid #e74a3b !important;
+	border-right:.25rem solid #e74a3b !important;
 }
 
 .border-bottom-primary {

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+         xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
       <title>Sujet</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,15 +33,29 @@
        <!--  end topbar -->
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
+<div class="col-md-10 col-12 mr-auto ml-auto">
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">sujet</h1>
-          <div class="row">
+          <div class="wizard-container">
+              <div class="card card-wizard active" data-color="rose" id="wizardProfile">
+               
+                  <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+                  <div class="card-header text-center">
+                    <h3 class="card-title">
+                      Sujets
+                    </h3>
+                    <h5 class="card-description"></h5>
+                  </div>
+                  <div class="wizard-navigation">
+                  <div class="card-body">
+                    <div class="tab-content">
+                     
+                      <div class="tab-pane show active" id="account">
+                      <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4" id="achat" >
-            	<a href="/Filter/ACHAT">
-              <div class="card border-left-primary shadow h-100 py-2">
+            <div class="col-xl-5 col-md-6 mb-4" id="achat" >
+              <a th:href="@{/Filter/ACHAT}">
+              <div class="card border-left-primary border-primary rounded-circle shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -56,9 +71,9 @@
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4" id="traveau">
-            	<a href="/Filter/TRAVAUX">
-              <div class="card border-left-success shadow h-100 py-2">
+            <div class="col-xl-5 offset-xl-2 col-md-6 mb-4" id="traveau">
+              <a th:href="@{/Filter/TRAVAUX}">
+              <div class="card border-left-success border-success rounded-circle shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -74,9 +89,9 @@
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4" id="temp">
-             <a href="/Filter/TEMPS">
-              <div class="card border-left-info shadow h-100 py-2">
+            <div class="col-xl-5 col-md-6 mb-4" id="temp">
+             <a th:href="@{/Filter/TEMPS}">
+              <div class="card border-left-info border-info rounded-circle shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -99,9 +114,9 @@
             </div>
 
             <!-- Pending Requests Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4" id="depence">
-            <a href="/Filter/DEPENCE">
-              <div class="card border-left-warning shadow h-100 py-2">
+            <div class="col-xl-5 offset-xl-2 col-md-6 mb-4" id="depence">
+            <a th:href="@{/Filter/DEPENCE}">
+              <div class="card border-left-warning border-warning rounded-circle shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -117,9 +132,9 @@
           </a>
             </div>
             <!-- Pending Requests Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4" id="stock">
-            	<a href="/Filter/STOCK">
-              <div class="card border-left-danger shadow h-100 py-2">
+            <div class="col-xl-5 col-md-6 mb-4" id="stock">
+              <a th:href="@{/Filter/STOCK}">
+              <div class="card border-left-danger border-danger rounded-circle shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -135,21 +150,39 @@
           </a>
             </div>
           </div>
+</div>
+                      </div>
+                    </div>
+                  </div>
+                 <!-- <div class="card-footer">
+                    
+                    
+                    <div class="clearfix"></div>
+                  </div>-->
+               
+              </div>
+            </div>
+          </div>
+            <!-- wizard container -->
+          </div>
+          
+      </div>
           <!-- /.container-fluid -->
-        </div>
+     
         <!-- End of Main Content -->
+
+        <!--  footer -->
+          <footer th:replace="fragments/footer :: footer" ></footer>
+        <!--  end footer -->
+
       </div>
       <!-- End of Content Wrapper -->
-        <!--  footer -->
-           <footer th:replace="fragments/footer :: footer" ></footer>
-        <!--  end footer -->
+
     </div>
     <!-- End of Page Wrapper -->
- <!-- Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
-    <div th:insert="fragments/js :: js"></div>
-  <!--  end Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
-  
+    <!-- Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
+      <div th:replace="fragments/js :: js"></div>
+    <!--  end Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->             
+  </body>
 
-</body>
-
-</html>
+  </html>

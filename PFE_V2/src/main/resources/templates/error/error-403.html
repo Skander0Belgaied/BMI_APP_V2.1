@@ -9,14 +9,14 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
     <!--  sidebar -->
-    <div th:replace="fragments/sidebar :: sidebar" sec:authorize="isAuthenticated()"></div>
+    <div th:insert="fragments/sidebar :: sidebar" sec:authorize="isAuthenticated()"></div>
     <!--  end sidebar -->
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
       <div id="content">
         <!--  topbar -->
-        <div th:replace="fragments/topbar :: topbar" sec:authorize="isAuthenticated()"></div>
+        <div th:insert="fragments/topbar :: topbar" sec:authorize="isAuthenticated()"></div>
         <!--  end topbar -->
 
         <!-- Begin Page Content -->

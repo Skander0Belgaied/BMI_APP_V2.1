@@ -30,6 +30,7 @@ import com.bmi.app.repository.UtilisateurRepository;
 import com.bmi.service.rapport.UploadServiceImpl;
 
 @Controller
+
 public class UploadController {
 	@Autowired
 	UploadServiceImpl uploadServiceImpl;
@@ -53,7 +54,7 @@ public class UploadController {
 	}
 
 	// @GetMapping(path = "/upload")
-	@PostMapping("/upload") // //new annotation since 4.3
+	@PostMapping("/upload") 
 	public String singleFileUpload(@RequestParam("file") MultipartFile file,HttpServletRequest request,
 			@RequestParam MultiValueMap<String, String> getform, RedirectAttributes redirectAttributes, Model model
 	

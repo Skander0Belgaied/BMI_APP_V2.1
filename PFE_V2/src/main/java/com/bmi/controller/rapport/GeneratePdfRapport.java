@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -216,10 +217,12 @@ public class GeneratePdfRapport {
 			List<String> itemIds=queryMap.get("input-filters");}
 		for(Filter filter:filtersList) {
 			
-			if(request.getQueryString().contains("input-filters"))
+			if(queryMap.containsKey("input-filters"))
 			{	
 				if(queryMap.get("input-filters").contains(String.valueOf(filter.getFilterId()))) {
-					if(request.getQueryString().contains("operatorLogique_"+filter.getFilterChamp())) {
+					
+					if(queryMap.containsKey("operatorLogique_"+filter.getFilterChamp())) {
+						
 						if((queryMap.get("operatorLogique_"+filter.getFilterChamp()).get(0)).equals("OR")) {
 						operatorLogique=" OR ";
 						}else
@@ -231,22 +234,68 @@ public class GeneratePdfRapport {
 					{
 						operatorLogique="";
 					}
-						
-				hashmap.put(filter.getFilterChamp(),queryMap.get(queryMap.get("input-filters").get(i)).get(0));
-				
-				if((queryMap.get("operator_"+filter.getFilterChamp()).get(0)).equals("like%")) {
+				int numberOfFilterX=queryMap.get(queryMap.get("input-filters").get(i)).size();
+				String filtersValue="";
+				for(int j=0;j<numberOfFilterX;j++) {
+					filtersValue+=queryMap.get(queryMap.get("input-filters").get(i)).get(j);
 					
-					where+=filter.getFilterChamp()+" LIKE '"+queryMap.get(queryMap.get("input-filters").get(i)).get(0)+"%'";
+if(filter.getFilterType().equals("date")) {
+	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+    String Date=sdf.format(sdf2.parse(queryMap.get(queryMap.get("input-filters").get(i)).get(j)));
+						if(j==0) 
+						{hashmap.put("DateDebut",Date);}
+						else
+						{hashmap.put("DateFin",Date);}
+					}
+					else if(j+1<numberOfFilterX) {
+						filtersValue+=" , ";
+					}
+						
+				}
+				if(filter.getFilterType()!="date") 
+				{hashmap.put(filter.getFilterChamp(),filtersValue);}
+for(int j=0;j<numberOfFilterX;j++) {
+	if(queryMap.containsKey("operator_"+filter.getFilterChamp())) {
+				if((queryMap.get("operator_"+filter.getFilterChamp()).get(0)).equals("like%")) {
+					where+=filter.getFilterChamp()+" LIKE '"+queryMap.get(queryMap.get("input-filters").get(i)).get(j)+"%'";
 					}
 				else if((queryMap.get("operator_"+filter.getFilterChamp()).get(0)).equals("%like%")) {
-					where+=filter.getFilterChamp()+" LIKE '%"+queryMap.get(queryMap.get("input-filters").get(i)).get(0)+"%'";
+					where+=filter.getFilterChamp()+" LIKE '%"+queryMap.get(queryMap.get("input-filters").get(i)).get(j)+"%'";
 					}
 				else if((queryMap.get("operator_"+filter.getFilterChamp()).get(0)).equals("%like")) {
-					where+=filter.getFilterChamp()+" LIKE '%"+queryMap.get(queryMap.get("input-filters").get(i)).get(0)+"'";
+					where+=filter.getFilterChamp()+" LIKE '%"+queryMap.get(queryMap.get("input-filters").get(i)).get(j)+"'";
 					}else
 					{
-						where+=filter.getFilterChamp()+" ='"+queryMap.get(queryMap.get("input-filters").get(i)).get(0)+"'";
+						where+=filter.getFilterChamp()+" ='"+queryMap.get(queryMap.get("input-filters").get(i)).get(j)+"'";
 					}
+					}else
+					{
+						if(filter.getFilterType().equals("date")) {
+							if(j==0)
+							{
+								where+=filter.getFilterChamp()+" BETWEEN ";
+							}
+			                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+			                String Date=sdf.format(sdf2.parse(queryMap.get(queryMap.get("input-filters").get(i)).get(j)));
+			               where+=" '"+Date+"' ";
+					
+					}else {
+					
+					where+=filter.getFilterChamp()+" ='"+queryMap.get(queryMap.get("input-filters").get(i)).get(j)+"'";
+					}
+						
+					}
+	
+				if(j+1<numberOfFilterX) {
+					if(filter.getFilterType().equals("date")) {
+						where+=" AND ";
+					}
+					else
+					{where+=" OR ";}
+				}
+}
 				if(queryMap.get("input-filters").size()!=i ) {
 					
 					where+=operatorLogique;
@@ -254,20 +303,25 @@ public class GeneratePdfRapport {
 				}
 				i++;
 			}else
-			{		
+			{		if(filter.getFilterType()!="date") {
 				hashmap.put(filter.getFilterChamp(),"ALL");
 			}
+			}
+
 			}
 			else 
 			{
 				where="where 1=1";
+				if(filter.getFilterType()!="date") {
 				hashmap.put(filter.getFilterChamp(),"ALL");
+				}
 			}
 			
 		}
 		
+		
 		hashmap.put("where", where);
-		//return where;
+
 		String RapportUrl=rapportRepository.findByRapportId(Long.parseLong(queryMap.get("rapportId").get(0))).getRapportUrl();
 
 		 try {
