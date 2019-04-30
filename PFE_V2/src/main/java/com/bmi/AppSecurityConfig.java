@@ -104,7 +104,7 @@ public BCryptPasswordEncoder passwordEncoder() {
 	}
 	@Override
 	public void sessionCreated(HttpSessionEvent se) {
-		  se.getSession().setMaxInactiveInterval(900);		
+		  se.getSession().setMaxInactiveInterval(9000);		
 	}
 
 	@Override

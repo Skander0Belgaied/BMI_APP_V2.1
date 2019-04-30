@@ -28,13 +28,15 @@ public class Rapport implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Rapport(Long rapportId, String rapportNom, String rapportUrl) {
+	public Rapport(Long rapportId, String rapportNom, Long utilisateurId, String rapportUrl, Date dateCreation) {
 		super();
 		this.rapportId = rapportId;
 		this.rapportNom = rapportNom;
+		this.utilisateurId = utilisateurId;
 		this.rapportUrl = rapportUrl;
+		this.dateCreation = dateCreation;
 	}
-	public Rapport(String string, String string2) {
+	public Rapport(String rapportNom, String rapportUrl) {
 		this.rapportNom = rapportNom;
 		this.rapportUrl = rapportUrl;
 	}
