@@ -124,6 +124,13 @@ public class UploadController {
 				System.out.println(e.getEtatId().getSujetType());
 				etatRepository.save(e);
 			 }
+			 }else
+			 { 
+				 EtatId etatID=new EtatId(sujet,(long) -1,rapportid);
+					Etat e=new Etat();
+					e.setEtatId(etatID);
+					System.out.println(e.getEtatId().getSujetType());
+					etatRepository.save(e);
 			 }
 			 model.addAttribute("status",FileStatus.get("msg"));
 			 return "/upload-status";

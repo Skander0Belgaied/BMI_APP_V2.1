@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bmi.app.entity.Etat;
 import com.bmi.app.entity.Rapport;
 import com.bmi.app.entity.Utilisateur;
+import com.bmi.app.repository.EtatRepository;
 import com.bmi.app.repository.RapportRepository;
 import com.bmi.app.repository.UtilisateurRepository;
-
-import antlr.StringUtils;
+import com.bmi.service.rapport.SujetRapport;
 
 @Controller
 public class RapportController {
@@ -25,6 +26,8 @@ public class RapportController {
 RapportRepository rapportRepository;
 	@Autowired
 UtilisateurRepository utilisateurRepository;
+	@Autowired
+EtatRepository etatRepository;
 List <Utilisateur> utilisateurs;
 List <Rapport> rapports;
 	@GetMapping("/Filter/{sujet}")
@@ -47,17 +50,27 @@ List <Rapport> rapports;
 		
 		return "sujet";
 	}
-	@GetMapping("/rapport-Management/delete")
-	 String ReportManagement(Model model) {
-		rapports=rapportRepository.findAll();
-		Map<Rapport,Utilisateur> map = new LinkedHashMap<Rapport,Utilisateur>(); 
-		for(Rapport rapport:rapports) {
-		map.put(rapport, utilisateurRepository.getOne(rapport.getUtilisateurId()));
-		}
-		model.addAttribute("rapports",map);
+	@GetMapping("/rapport-Management")
+	 String ReportManagement() {
 	
 		
 		return "GestionRapport";
+	}
+	@GetMapping("/rapport-Management/delete")
+	 String ReportManagementShow(Model model) {
+		rapports=rapportRepository.findAll();
+		Map<Rapport,SujetRapport> map = new LinkedHashMap<Rapport,SujetRapport>(); 
+		for(Rapport rapport:rapports) {
+			Utilisateur user=utilisateurRepository.getOne(rapport.getUtilisateurId());
+			Etat sujet=etatRepository.findByEtatIdRapportId((Long)rapport.getRapportId()).get(0);
+			SujetRapport sujetr=new SujetRapport(user,sujet.getEtatId().getSujetType());
+		map.put(rapport, sujetr);
+		}
+		
+		model.addAttribute("rapports",map);
+	
+		
+		return "DeleteRapport";
 	}
 	@GetMapping("/rapport-Management/delete/{id}")
 	String ReportDelete(@PathVariable(name="id") Long id,Model model) {
@@ -72,7 +85,7 @@ List <Rapport> rapports;
 		rapportRepository.deleteById(id);
 		model.addAttribute("status","Rapport '"+rapportname+"' supprimée avec succès");
 		model.addAttribute("rapports",map);
-		return "GestionRapport";
+		return "DeleteRapport";
 	}
 	@GetMapping("/rapport-Management/recherche")
 	String Reportrecherche(@RequestParam MultiValueMap<String, String> request ,Model model) {
@@ -88,15 +101,19 @@ List <Rapport> rapports;
 		   }
 		if(rapportRepository.findByRapportIdOrRapportName(request.get("recherche").get(0),rechercheint).size()>0) {
 		rapports=rapportRepository.findByRapportIdOrRapportName(request.get("recherche").get(0),rechercheint);
-		Map<Rapport,Utilisateur> map = new LinkedHashMap<Rapport,Utilisateur>(); 
+		Map<Rapport,SujetRapport> map = new LinkedHashMap<Rapport,SujetRapport>(); 
 		for(Rapport rapport:rapports) {
-		map.put(rapport, utilisateurRepository.getOne(rapport.getUtilisateurId()));
+			Utilisateur user=utilisateurRepository.getOne(rapport.getUtilisateurId());
+			Etat sujet=etatRepository.findByEtatIdRapportId(rapport.getRapportId()).get(0);
+			SujetRapport sujetr=new SujetRapport(user,sujet.getEtatId().getSujetType());
+		map.put(rapport, sujetr);
 		}
 		
 		model.addAttribute("rapports",map);
 		}else {
 		model.addAttribute("rapports",null);
 		}
-		return "GestionRapport";
+		return "DeleteRapport";
 	}
+	
 }

@@ -34,14 +34,19 @@
       <hr class="sidebar-divider" sec:authorize="hasRole('ADMIN')">
       <!-- Heading -->
         <div class="sidebar-heading" sec:authorize="hasRole('ADMIN')">
-          User
+          Privilèges d'administrateur
         </div>
         <!-- Nav Item - Dashboard -->
 
       <li class="nav-item">
         <a class="nav-link" th:href="@{/cfg-account}" sec:authorize="hasRole('ADMIN')">
+          <i class="fas fa-user-circle"></i>
+            <span>Gestion des Utilisateurs</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" th:href="@{/rapport-Management}" sec:authorize="hasRole('ADMIN')">
           <i class="fas fa-chart-line"></i>
-            <span>Gestion d'utilisateur</span></a>
+            <span>Gestion des Rapports</span></a>
       </li>
       
       <!-- Divider -->

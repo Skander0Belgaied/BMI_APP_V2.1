@@ -78,7 +78,7 @@
   </div>
 </div>  
     <!-- Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
-    <div th:replace="fragments/js :: js" sec:authorize="isAuthenticated()"></div>
+    <div th:insert="fragments/js :: js" sec:authorize="isAuthenticated()"></div>
     <!--  end Bootstrap core JavaScript + Scroll to Top Button +  Logout Modal-->
     
 </body>

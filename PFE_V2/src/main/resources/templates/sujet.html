@@ -22,7 +22,7 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
     <!--  sidebar -->
-      <div th:insert="fragments/sidebar :: sidebar"></div>
+      <div th:replace="fragments/sidebar :: sidebar"></div>
       <!--  end sidebar -->
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -33,7 +33,9 @@
        <!--  end topbar -->
         <!-- Begin Page Content -->
         <div class="container-fluid">
-<div class="col-md-10 col-12 mr-auto ml-auto">
+<div class="col-md-11 col-12 mr-auto ml-auto">
+  <div class="row text-center">
+              
           <!-- Page Heading -->
           <div class="wizard-container">
               <div class="card card-wizard active" data-color="rose" id="wizardProfile">
@@ -53,101 +55,76 @@
                       <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-5 col-md-6 mb-4" id="achat" >
-              <a th:href="@{/Filter/ACHAT}">
-              <div class="card border-left-primary border-primary rounded-circle shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">achat</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
+            <div class="col-xl-5 col-md-6 mb-4" id="achat">
+            <div class="col-md border-right py-4">
+                    <span class="fa-stack fa-4x mb-4">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                    </span>
+                    
+                    
+                    
+                    <a th:href="@{/Filter/ACHAT}" class="btn btn-lg btn-primary btn-pill">ACHAT</a>
                 </div>
-              </div></a>
             </div>
+
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-5 offset-xl-2 col-md-6 mb-4" id="traveau">
-              <a th:href="@{/Filter/TRAVAUX}">
-              <div class="card border-left-success border-success rounded-circle shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">travaux</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-truck fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
+               <div class="col-md border-right py-4">
+                    <span class="fa-stack fa-4x mb-4">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-truck fa-stack-1x fa-inverse"></i>
+                    </span>
+                    
+                    
+                    
+                    <a th:href="@{/Filter/TRAVAUX}" class="btn btn-lg btn-primary btn-pill">TRAVAUX</a>
                 </div>
-              </div></a>
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
+
             <div class="col-xl-5 col-md-6 mb-4" id="temp">
-             <a th:href="@{/Filter/TEMPS}">
-              <div class="card border-left-info border-info rounded-circle shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">temps</div>
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
-                        </div>
-                        <div class="col">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="far fa-clock fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
+              <div class="col-md border-right py-4">
+                    <span class="fa-stack fa-4x mb-4">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-clock fa-stack-1x fa-inverse"></i>
+                    </span>
+                    
+                    
+                    
+                    <a th:href="@{/Filter/TEMPS}" class="btn btn-lg btn-primary btn-pill">TEMPS</a>
                 </div>
-              </div>
-              </a>
             </div>
 
             <!-- Pending Requests Card Example -->
+
             <div class="col-xl-5 offset-xl-2 col-md-6 mb-4" id="depence">
-            <a th:href="@{/Filter/DEPENCE}">
-              <div class="card border-left-warning border-warning rounded-circle shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">depence</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
+            <div class="col-md border-right py-4">
+                    <span class="fa-stack fa-4x mb-4">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-dollar-sign fa-stack-1x fa-inverse"></i>
+                    </span>
+                    
+                    
+                    
+                    <a th:href="@{/Filter/DEPENCE}" class="btn btn-lg btn-primary btn-pill">DEPENCE</a>
                 </div>
-              </div>
-          </a>
             </div>
             <!-- Pending Requests Card Example -->
+
             <div class="col-xl-5 col-md-6 mb-4" id="stock">
-              <a th:href="@{/Filter/STOCK}">
-              <div class="card border-left-danger border-danger rounded-circle shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Stock</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class=" fas fa-shopping-basket fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
+            <div class="col-md border-right py-4">
+                    <span class="fa-stack fa-4x mb-4">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-shopping-basket fa-stack-1x fa-inverse"></i>
+                    </span>
+                    
+                    
+                    
+                    <a th:href="@{/Filter/STOCK}" class="btn btn-lg btn-primary btn-pill">STOCK</a>
                 </div>
-              </div>
-          </a>
             </div>
           </div>
 </div>

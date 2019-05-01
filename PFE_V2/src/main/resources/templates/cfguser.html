@@ -35,86 +35,96 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid" id="page-content">
+					<!-- gestion-Utilisateur-->
+					<div class="col-md-11 col-12 mr-auto ml-auto">
+  <div class="row text-center">
+              
+          <!-- Page Heading -->
+          <div class="wizard-container">
+              <div class="card card-wizard active" data-color="rose" id="wizardProfile">
+               
+                  <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+                  <div class="card-header text-center">
+                    <h3 class="card-title">
+                     Gestion des Utilisateurs
+                    </h3>
+                    <h5 class="card-description"></h5>
+                  </div>
+                  <div class="wizard-navigation">
+                  <div class="card-body">
+                    <div class="tab-content">
+                     
+                      <div class="tab-pane show active" id="account">
+                      <div class="row">
+                        <div class="col-xl-4  col-md-6 mb-4" id="traveau">
+               <div class="col-md border-right py-4">
+                    <span class="fa-stack fa-4x mb-4">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-trash fa-stack-1x fa-inverse"></i>
+                    </span>
+                    
+                    
+                    
+                    <a th:href="@{#}"  data-toggle="modal"
+								data-target="#suprimerutilisateur" class="btn  btn-primary btn-pill">Suppression d'un utilisateur</a>
+                </div>
+            </div>
+
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-4 col-md-6 mb-4" id="achat">
+            <div class="col-md border-right py-4">
+                    <span class="fa-stack fa-4x mb-4">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                    </span>
+                    
+                    
+                    
+                    <a th:href="@{#}" data-toggle="modal"
+								data-target="#ajoututilisateur" class="btn  btn-primary btn-pill">Ajout d'un utilisateur</a>
+
+                </div>
+            </div>
+
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-4 col-md-6 mb-4" id="traveau">
+               <div class="col-md border-right py-4">
+                    <span class="fa-stack fa-4x mb-4">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa  fa-user-edit fa-stack-1x fa-inverse"></i>
+                    </span>
+                    
+                    
+                    
+                    
+								  <a th:href="@{#}" data-toggle="modal"
+								data-target="#modifierutilisateur" class="btn  btn-primary btn-pill">Modification d'un utilisateur</a>
+                </div>
+            </div>
+
+            
+          </div>
+</div>
+                      </div>
+                    </div>
+                  </div>
+                 <!-- <div class="card-footer">
+                    
+                    
+                    <div class="clearfix"></div>
+                  </div>-->
+               
+              </div>
+            </div>
+          </div>
+            <!-- wizard container -->
+          </div>
+					<!--gestion-Utilisateur-->
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">configuration d'utilisateur</h1>
 					<div class="row">
 
-						<!-- Card Example -->
-						<div class="col-xl-4 col-md-6 mb-4" id="adduser">
-							<a class="dropdown-item" th:href="@{#/}" data-toggle="modal"
-								data-target="#ajoututilisateur">
-								<div class="card border-left-primary shadow h-100 py-2">
-									<div class="card-body">
-										<div class="row no-gutters align-items-center">
-											<div class="col mr-2">
-												<div
-													class="text-xs font-weight-bold text-primary text-uppercase mb-1">ajout
-													utilisateur</div>
-												<div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-											</div>
-											<div class="col-auto">
-												<i class="fas fa-user-plus fa-2x text-gray-300"></i>
-											</div>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-
-
-
-						<!-- Card Example -->
-						<div class="col-xl-4 col-md-6 mb-4" id="updtuser">
-							<a class="dropdown-item" th:href="@{#}" data-toggle="modal"
-								data-target="#modifierutilisateur">
-								<div class="card border-left-success shadow h-100 py-2">
-									<div class="card-body">
-										<div class="row no-gutters align-items-center">
-											<div class="col mr-2">
-												<div
-													class="text-xs font-weight-bold text-success text-uppercase mb-1">modifier
-													utilisateur</div>
-												<div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-											</div>
-											<div class="col-auto">
-												<i class="fas fa-user-edit fa-2x text-gray-300"></i>
-											</div>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-
-
-						<!-- Card Example -->
-						<div class="col-xl-4 col-md-6 mb-4" id="deleteuser">
-							<a class="dropdown-item" th:href="@{#}"  data-toggle="modal"
-								data-target="#suprimerutilisateur">
-								<div class="card border-left-info shadow h-100 py-2">
-									<div class="card-body">
-										<div class="row no-gutters align-items-center">
-											<div class="col mr-2">
-												<div
-													class="text-xs font-weight-bold text-info text-uppercase mb-1">supprimer
-													utilisateur</div>
-												<div class="row no-gutters align-items-center">
-													<div class="col-auto">
-														<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
-													</div>
-													<div class="col"></div>
-												</div>
-											</div>
-											<div class="col-auto">
-												<i class="fas fa-user-minus fa-2x text-gray-300"></i>
-											</div>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-
-					</div>
-					<!-- /.container-fluid -->
 					<!-- Modal fade ajouter utilisateur-->
 					<div class="modal fade" id="ajoututilisateur" tabindex="-1"
 						role="dialog" aria-labelledby="exampleModalLabel"
@@ -134,22 +144,22 @@
 									<div class="card-body">
 										<form>
 											<div class="form-group row">
-												<label for="firstname" class="col-md-2 col-form-label">nom</label>
+												<label for="firstname" class="col-md-2 col-form-label">Nom</label>
 												<div class="col-md-10">
 													<input type="text" class="form-control" id="utilisateurNom"
-														placeholder="entrer le nom">
+														placeholder="Entrer le nom">
 												</div>
-												<label for="lastname" class="col-md-2 col-form-label">PrÃ©nom</label>
+												<label for="lastname" class="col-md-2 col-form-label">Prénom</label>
 												<div class="col-md-10">
 													<input type="email" class="form-control" id="utilisateurPrenom"
-														placeholder="entrer le prÃ©nom">
+														placeholder="Entrer le prénom">
 												</div>
 												<label for="exampleInputEmail1"
 													class="col-sm-2 col-form-label">Email address</label>
 												<div class="col-md-10">
 													<input type="email" class="form-control"
 														id="utilisateurEmail" aria-describedby="emailHelp"
-														placeholder="Entrer lemail"><small id="emailHelp"
+														placeholder="Entrer l'email"><small id="emailHelp"
 														class="form-text text-muted">Nous ne partagerons
 														jamais votre email avec qui que ce soit.</small>
 												</div>
@@ -160,15 +170,15 @@
 														id="utilisateurPassword" placeholder="Mot de passe">
 												</div>
 												<label for="exampleInputPassword1"
-													class="col-sm-2 col-form-label"> reÃ©crire Mot de
+													class="col-sm-2 col-form-label"> Reécrire Mot de
 													passe</label>
 												<div class="col-md-10">
 													<input type="password" class="form-control"
-														placeholder="reÃ©crire Mot de passe">
+														placeholder="reécrire Mot de passe">
 												</div>
 												<div class="form-check form-check-inline">
-													<label class="form-check-label" for="inlineCheckbox1">cochez
-														ici si vous allez ajouter un admin</label><input
+													<label class="form-check-label" for="inlineCheckbox1">Cochez
+														ici si vous allez ajouter un admin </label><input
 														class="form-check-input" type="checkbox"
 														id="utilisateurType" name="utilisateurType" value="ADMIN">
 
@@ -206,22 +216,22 @@
 									<div class="card-body">
 										<form>
 											<div class="form-group row">
-												<label for="firstname" class="col-md-2 col-form-label">Seach</label>
+												<label for="firstname" class="col-md-2 col-form-label">Rechercher</label>
 												<div class="col-md-10">
 													<input type="text" class="form-control" list="utilisateurs" id="updatefilter"name="utilisateur">
 												<datalist id="utilisateurs">
   												</datalist>
 												</div>
-												<label for="firstname" class="col-md-2 col-form-label">nom</label>
+												<label for="firstname" class="col-md-2 col-form-label">Nom</label>
 												<div class="col-md-10">
 													<input type="text" class="form-control" id="utilisateurNom1"
-														placeholder="entrer le nom">
+														placeholder="Entrer le nom">
 												</div>
 												
-												<label for="lastname" class="col-md-2 col-form-label">PrÃ©nom</label>
+												<label for="lastname" class="col-md-2 col-form-label">Prénom</label>
 												<div class="col-md-10">
 													<input type="text" class="form-control" id="utilisateurPrenom1"
-														placeholder="entrer le prÃ©nom">
+														placeholder="Entrer le prénom">
 												</div>
 											
 												<label for="exampleInputEmail2"
@@ -229,7 +239,7 @@
 												<div class="col-md-10">
 													<input type="email" class="form-control"
 														id="utilisateurEmail1" aria-describedby="emailHelp"
-														placeholder="Entrer lemail" disabled="true"><small id="emailHelp"
+														placeholder="Entrer l'email" disabled="true"><small id="emailHelp"
 														class="form-text text-muted">Nous ne partagerons
 														jamais votre email avec qui que ce soit.</small>
 												</div>
@@ -271,15 +281,14 @@
 
 								<div class="modal-body">
 									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">�</span>
+										<span aria-hidden="true">×</span>
 									</button>
 									<div class="card-header ">
 										<h6 class="m-0 font-weight-bold text-primary">Modifier
 											utilisateur</h6>
 									</div>
 									<div class="card-body">
-<div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_filter"><label>Search:<input  id="filter" type="search" class="form-control form-control-md" placeholder="" aria-controls="dataTable"></label><button id="getALlBooks" type="button" class="btn btn-primary">Search
-				All Books</button></div></div></div>
+<div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_filter"><label>Rechercher:<input  id="filter" type="search" class="form-control form-control-md" placeholder="" aria-controls="dataTable"></label></div></div></div>
   
 									<div class="table-responsive">
 										<table class="table table-hover">
@@ -308,6 +317,7 @@
 					</div>
 					<div id="test"></div>
 				</div>
+			</div>
 			</div>
 			<!-- End of Content Wrapper -->
 			<!--  footer -->

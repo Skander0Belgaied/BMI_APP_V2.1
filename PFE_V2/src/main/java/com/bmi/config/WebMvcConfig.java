@@ -8,10 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-/**
- * @author Siva
- * 
- */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter
 {
