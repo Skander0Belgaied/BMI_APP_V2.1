@@ -1,10 +1,13 @@
 package com.bmi.controller.rapport;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -13,11 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bmi.app.entity.Etat;
+import com.bmi.app.entity.Filter;
 import com.bmi.app.entity.Rapport;
 import com.bmi.app.entity.Utilisateur;
 import com.bmi.app.repository.EtatRepository;
+import com.bmi.app.repository.FilterRepository;
 import com.bmi.app.repository.RapportRepository;
 import com.bmi.app.repository.UtilisateurRepository;
+import com.bmi.service.app.ServicerResponseApi;
 import com.bmi.service.rapport.SujetRapport;
 
 @Controller
@@ -28,6 +34,8 @@ RapportRepository rapportRepository;
 UtilisateurRepository utilisateurRepository;
 	@Autowired
 EtatRepository etatRepository;
+	@Autowired
+FilterRepository filterRepository;
 List <Utilisateur> utilisateurs;
 List <Rapport> rapports;
 	@GetMapping("/Filter/{sujet}")
@@ -114,6 +122,15 @@ List <Rapport> rapports;
 		model.addAttribute("rapports",null);
 		}
 		return "DeleteRapport";
+	}
+	
+	@GetMapping(path = { "/filter-Managment/delete" })
+	public String getAllFillters(Model model) {
+
+		List<Filter> filtersList = new ArrayList<Filter>();
+		filtersList=filterRepository.findAll();
+		model.addAttribute("filters", filtersList);
+		return "DeleteFiltre";
 	}
 	
 }

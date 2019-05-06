@@ -16,7 +16,7 @@
     console.log(rapportId);
    swal({
   title: "Êtes-vous sûr?",
-  text: "Une fois supprimé, vous ne pourrez plus récupérer ce fichier!",
+  text: "Une fois supprimé, vous ne pourrez plus récupérer ce Filtre !",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -144,9 +144,16 @@ a.btn-top:hover
         <!-- Begin Page Content -->
         <div class="container-fluid" id="page-content">
           <div class="row">
+
+<div class="offset-md-5 col-sm-12" sec:authorize="hasRole('ADMIN')">
+  <br>
+</div>
+<div class="offset-md-5 col-sm-12" sec:authorize="hasRole('ADMIN')">
+  <br>
+</div>
 <div class="s004 col-sm-12">
       <form action="/rapport-Management/recherche" method="get">
-        <h2 style="color: #448aff;text-align: center;"> Rapports </h2>
+        <h2 style="color: #448aff;text-align: center;"> Filtres </h2>
         <hr>
           <div class="inner-form">
             <div class="input-field">
@@ -164,53 +171,57 @@ a.btn-top:hover
           </div>
       </form>
           </div>
-<div class="offset-md-5 col-sm-12" sec:authorize="hasRole('ADMIN')">
-  <a class="btn btn-lg btn-success" th:href="@{/addEtat}"><i class="fa fa-plus">Ajout d'un rapport</i></a>
-</div>
-<div class="offset-md-5 col-sm-12" sec:authorize="hasRole('ADMIN')">
-  <br>
-</div>
-<div class="offset-md-5 col-sm-12" sec:authorize="hasRole('ADMIN')">
-  <br>
+  <div class="col-sm-12" sec:authorize="hasRole('ADMIN')">
+ <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Filters</h6>
+                </div>
+                <div class="card-body">
+                   <div class="row">
+Nom Du Filter
+            <div class="offset-md-1 col-md-2 mb-2">
+             <input type="text" name="filterNom" class="form-control" placeholder="Filter Date" required="">
+            </div>
+Champ Du Filter
+              <div class=" col-md-2 mb-2">
+                <input type="text" name="filterChamp" placeholder="ST_DATEFIN" class="form-control" required="">
+            </div>
+          Type Filter
+              <div class="col-md-2 mb-2">
+             <select name="filterType" class="form-control" required="">
+              <option value="text" selected="">text</option>
+              <option value="number">number</option>
+              <option value="date">Date</option>
+             </select>
+            </div>    
+             <div class="col-md-2 mb-2">
+  <a class="btn btn btn-success" th:href="@{/addEtat}"><i class="fa fa-plus">Ajout d'un filtre</i></a>
 </div>
         </div>
+       
+
+        </div>
+    
 <div class="table-responsive">
   <table class="table table-striped">
 
      <thead>
         <tr class="row-name">
-           <th style="width:8%" sec:authorize="hasRole('ADMIN')">Identifiant</th>
-           <th style="width:15%" sec:authorize="hasRole('ADMIN')">Nom du Rapport</th>
-           <th sec:authorize="hasRole('ADMIN')">Sujet</th>
-           <th style="width:20%" sec:authorize="hasRole('USER')">Identifiant</th>
-           <th style="width:30%" sec:authorize="hasRole('USER')">Nom du Rapport</th>
-           <th style="width:30%" sec:authorize="hasRole('USER')">Sujet</th>  
-           <th sec:authorize="hasRole('ADMIN')" >Date Creation</th>
-           <th sec:authorize="hasRole('ADMIN')">Createur</th>
-           <th sec:authorize="hasRole('ADMIN')">Email </th>
-           <th></th>
-        </tr>
+           <th style="width:15%" sec:authorize="hasRole('ADMIN')">Nom du Filtre</th>
+           <th style="width:15%" sec:authorize="hasRole('ADMIN')">Champ du Filtre</th>
+           <th style="width:15%" sec:authorize="hasRole('ADMIN')"> Type du Filtre</th>
+           <th style="width:8%"sec:authorize="hasRole('ADMIN')"> </th>      
+             </tr>
      </thead>   
      <tbody>
-        <tr class="row-content"   th:if="${rapports} != null" th:each="rapport : ${rapports}">
-            <td> <span class="label label-default" th:text="${rapport.key.getRapportId()}"> </span></td>
-           <td> <span class="label label-default" th:text="${rapport.key.getRapportNom()}">  </span></td>
-           <td  th:text="${rapport.value.getSujet()}"></td>
-           <td th:text="${rapport.key.getDateCreation()}" sec:authorize="hasRole('ADMIN')"></td>
-            <td  th:text="${rapport.value.getUtilisateur().getUtilisateurNom()}+' '+${rapport.value.utilisateur.getUtilisateurPrenom()}" sec:authorize="hasRole('ADMIN')"></td>
-            <td th:text="${rapport.value.getUtilisateur().getUtilisateurEmail()}" sec:authorize="hasRole('ADMIN')"></i></td>
+        <tr class="row-content"   th:if="${filters} != null" th:each="filter : ${filters}">
+           <td th:text="filter.filterNom" sec:authorize="hasRole('ADMIN')"></td>
+            <td  th:text="filter.filterChamp" sec:authorize="hasRole('ADMIN')"></td>
+            <td th:text="filter.filterType" sec:authorize="hasRole('ADMIN')"></i></td>
            <td>
      <div class="row">
-       <div class="col-sm-4">
-       <input class="star" type="checkbox" title="bookmark page">
-        </div>
-         <div class="col-sm-4">
-                <a class="btn btn-info " onclick="">
-                <i class="fa fa-search" aria-hidden="true"></i>
-               </a>
-        </div>
         <div class="col-sm-4" sec:authorize="hasRole('ADMIN')">
-              <a class="btn btn-danger " th:onclick="'deleteButton(\''+ ${rapport.key.rapportId} +'\')'" aria-label="Settings">
+              <a class="btn btn-danger " th:onclick="'deleteButton(\''+ ${filter.filterId} +'\')'" aria-label="Settings">
               <i class="fa fa-trash" aria-hidden="true"></i>
               </a>
         </div>
@@ -220,9 +231,6 @@ a.btn-top:hover
            </td>
         </tr>
          <tr class="row-content" th:if="${rapports} == null" >
-           <td></td>
-           <td></td>
-           <td></td>
            <td sec:authorize="hasRole('ADMIN')"></td>
            <td sec:authorize="hasRole('ADMIN')"></td>
            <td sec:authorize="hasRole('ADMIN')"></td>
@@ -231,6 +239,9 @@ a.btn-top:hover
      </tbody>
   </table>
    </div>
+   </div>
+</div>
+        </div>
           </div>
           <!-- /.container-fluid -->
 

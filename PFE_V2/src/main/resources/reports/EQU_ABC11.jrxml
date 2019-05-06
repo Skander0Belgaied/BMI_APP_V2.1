@@ -3,55 +3,6 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="equipmnt1" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f73747f-d6eb-429a-a706-a8ad5c10d82e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sqlserveur"/>
-	<subDataset name="Dataset1" uuid="4b00d463-6acd-4850-8b6d-0ac8c2853f35">
-		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sqlserveur"/>
-		<queryString language="SQL">
-			<![CDATA[select * from vper_bmiequ]]>
-		</queryString>
-		<field name="ST_DES_EQU" class="java.lang.String">
-			<property name="com.jaspersoft.studio.field.label" value="ST_DES_EQU"/>
-		</field>
-		<field name="Duree_arret" class="java.math.BigDecimal">
-			<property name="com.jaspersoft.studio.field.label" value="Duree_arret"/>
-		</field>
-		<field name="Total_matiere" class="java.math.BigDecimal">
-			<property name="com.jaspersoft.studio.field.label" value="Total_matiere"/>
-		</field>
-		<field name="Total_exterieur" class="java.math.BigDecimal">
-			<property name="com.jaspersoft.studio.field.label" value="Total_exterieur"/>
-		</field>
-		<field name="Total_main_oeuvre" class="java.math.BigDecimal">
-			<property name="com.jaspersoft.studio.field.label" value="Total_main_oeuvre"/>
-		</field>
-		<field name="Total_cout" class="java.math.BigDecimal">
-			<property name="com.jaspersoft.studio.field.label" value="Total_cout"/>
-		</field>
-		<field name="ST_CODCOU" class="java.lang.String">
-			<property name="com.jaspersoft.studio.field.label" value="ST_CODCOU"/>
-		</field>
-		<group name="ST_DES_EQU">
-			<groupExpression><![CDATA[$F{ST_DES_EQU}]]></groupExpression>
-		</group>
-		<group name="Duree_arret">
-			<groupExpression><![CDATA[$F{Duree_arret}]]></groupExpression>
-		</group>
-		<group name="Total_matiere">
-			<groupExpression><![CDATA[$F{Total_matiere}]]></groupExpression>
-		</group>
-		<group name="Total_exterieur">
-			<groupExpression><![CDATA[$F{Total_exterieur}]]></groupExpression>
-		</group>
-		<group name="Total_main_oeuvre">
-			<groupExpression><![CDATA[$F{Total_main_oeuvre}]]></groupExpression>
-		</group>
-		<group name="Total_cout">
-			<groupExpression><![CDATA[$F{Total_cout}]]></groupExpression>
-		</group>
-		<group name="ST_CODCOU">
-			<groupExpression><![CDATA[$F{ST_CODCOU}]]></groupExpression>
-		</group>
-	</subDataset>
 	<parameter name="where" class="java.lang.String"/>
 	<parameter name="groupby" class="java.lang.String"/>
 	<parameter name="ST_CODLON_EQU" class="java.lang.String"/>
@@ -59,8 +10,6 @@
 	<parameter name="ST_DES_GRO" class="java.lang.String"/>
 	<parameter name="ID_CODTRA_BT" class="java.lang.String"/>
 	<parameter name="ID_NUMEQU_BT" class="java.lang.String"/>
-	<parameter name="DateFin" class="java.lang.String"/>
-	<parameter name="DateDebut" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT [ID_NUMBT_BT]
       ,[ID_NUMEQU_BT]
@@ -77,10 +26,8 @@
       ,[Total_main_oeuvre]
       ,[Total_cout]
       ,[Date_intervention]
-      ,[ST_CODCOU]
       ,(select sum(Total_cout) from VPER_BMIEQU   $P!{where} )as Total
-  FROM [MAINTA_TEST].[dbo].[VPER_BMIEQU] $P!{where}
-  ORDER BY [Total_cout] DESC]]>
+  FROM [MAINTA_TEST].[dbo].[VPER_BMIEQU] $P!{where}]]>
 	</queryString>
 	<field name="ID_NUMBT_BT" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.label" value="ID_NUMBT_BT"/>
@@ -96,9 +43,6 @@
 	</field>
 	<field name="ST_DES_EQU" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="ST_DES_EQU"/>
-	</field>
-	<field name="ST_CODCOU" class="java.lang.String">
-		<property name="property.name" value="ST_CODCOU"/>
 	</field>
 	<field name="ID_CODCAT_CAT" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="ID_CODCAT_CAT"/>
@@ -131,7 +75,7 @@
 		<property name="com.jaspersoft.studio.field.label" value="Date_intervention"/>
 	</field>
 	<field name="Total" class="java.lang.Double"/>
-	<variable name="cumulé" class="java.lang.Float" calculation="Sum">
+	<variable name="cumulé" class="java.lang.Float" incrementType="Group" incrementGroup="Total_cout" calculation="Sum">
 		<variableExpression><![CDATA[$F{Total_cout}]]></variableExpression>
 	</variable>
 	<variable name="cumulé % " class="java.lang.Double">
@@ -140,9 +84,6 @@
 	<variable name="Totalcout%" class="java.lang.Double">
 		<variableExpression><![CDATA[(($F{Total_cout}/$F{Total})*100)%.3f]]></variableExpression>
 	</variable>
-	<variable name="Total" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{Total_cout}]]></variableExpression>
-	</variable>
 	<group name="Total_cout">
 		<groupExpression><![CDATA[$F{Total_cout}]]></groupExpression>
 	</group>
@@ -150,7 +91,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="481" splitType="Stretch">
+		<band height="487" splitType="Stretch">
 			<staticText>
 				<reportElement x="95" y="57" width="531" height="30" uuid="24d59fab-73ca-4306-a083-b28ad5d5db48"/>
 				<box>
@@ -190,47 +131,47 @@
 				<text><![CDATA[à]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="95" y="110" width="175" height="20" uuid="419043f9-e1dd-4bd1-b1f7-080d734c1c51"/>
+				<reportElement x="128" y="110" width="116" height="20" uuid="419043f9-e1dd-4bd1-b1f7-080d734c1c51"/>
 				<textElement>
 					<font size="14"/>
 					<paragraph lineSpacingSize="2.0"/>
 				</textElement>
-				<text><![CDATA[Code long emplacement]]></text>
+				<text><![CDATA[Equipement :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="97" y="153" width="170" height="20" uuid="24abe977-aaaa-4063-882c-2ef08b8e4015"/>
+				<reportElement x="128" y="157" width="60" height="20" uuid="24abe977-aaaa-4063-882c-2ef08b8e4015"/>
 				<textElement>
 					<font size="14"/>
 					<paragraph lineSpacingSize="2.0"/>
 				</textElement>
-				<text><![CDATA[Désignation équipement]]></text>
+				<text><![CDATA[Groupe :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="200" width="167" height="20" uuid="7446e526-9118-4cee-ae94-418d21f68f70"/>
+				<reportElement x="128" y="202" width="92" height="20" uuid="7446e526-9118-4cee-ae94-418d21f68f70"/>
 				<textElement>
 					<font size="14"/>
 					<paragraph lineSpacingSize="2.0"/>
 				</textElement>
-				<text><![CDATA[Désignation Groupe ]]></text>
+				<text><![CDATA[Type de travail : ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="247" width="167" height="20" uuid="f0c37ee9-03d2-4d78-991a-4d356d91835f"/>
+				<reportElement x="128" y="247" width="82" height="20" uuid="f0c37ee9-03d2-4d78-991a-4d356d91835f"/>
 				<textElement>
 					<font size="14"/>
 					<paragraph lineSpacingSize="2.0"/>
 				</textElement>
-				<text><![CDATA[Code type travail ]]></text>
+				<text><![CDATA[Organisation]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="300" width="167" height="20" uuid="02a99989-1830-4fbb-8aac-6296f44222dd"/>
+				<reportElement x="128" y="292" width="100" height="20" uuid="02a99989-1830-4fbb-8aac-6296f44222dd"/>
 				<textElement>
 					<font size="14"/>
 					<paragraph lineSpacingSize="2.0"/>
 				</textElement>
-				<text><![CDATA[Equipement]]></text>
+				<text><![CDATA[Centre de coùt :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="340" width="167" height="20" uuid="989d8772-a243-4230-a9fb-591cce0ae3f0"/>
+				<reportElement x="128" y="337" width="100" height="20" uuid="989d8772-a243-4230-a9fb-591cce0ae3f0"/>
 				<textElement>
 					<font size="14"/>
 					<paragraph lineSpacingSize="2.0"/>
@@ -238,7 +179,7 @@
 				<text><![CDATA[Date début :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="382" width="167" height="20" uuid="055e0d0e-99cf-4427-849a-d2511a964d65"/>
+				<reportElement x="128" y="382" width="100" height="20" uuid="055e0d0e-99cf-4427-849a-d2511a964d65"/>
 				<textElement>
 					<font size="14"/>
 					<paragraph lineSpacingSize="2.0"/>
@@ -249,37 +190,29 @@
 				<reportElement x="0" y="480" width="95" height="1" uuid="2ff6a257-9279-42aa-82db-abff879920a4"/>
 			</break>
 			<textField>
-				<reportElement x="274" y="110" width="262" height="20" uuid="9e4f951b-4146-4597-9a18-aafa0f9ec26c"/>
+				<reportElement x="270" y="110" width="159" height="20" uuid="9e4f951b-4146-4597-9a18-aafa0f9ec26c"/>
 				<textFieldExpression><![CDATA[$P{ST_CODLON_EQU}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="277" y="153" width="259" height="17" uuid="9410af20-68fb-4814-a204-77b060f24ccf"/>
+				<reportElement x="260" y="152" width="203" height="30" uuid="9410af20-68fb-4814-a204-77b060f24ccf"/>
 				<textFieldExpression><![CDATA[$P{ST_DES_EQU}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="277" y="200" width="259" height="20" uuid="dbee2b5c-f5a7-452c-ad5b-2b6b59d4e9cf"/>
+				<reportElement x="260" y="200" width="259" height="30" uuid="dbee2b5c-f5a7-452c-ad5b-2b6b59d4e9cf"/>
 				<textFieldExpression><![CDATA[$P{ST_DES_GRO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="277" y="247" width="259" height="20" uuid="06e7cbb2-3d4c-4ada-9525-095dc7641eb5"/>
+				<reportElement x="259" y="250" width="260" height="27" uuid="06e7cbb2-3d4c-4ada-9525-095dc7641eb5"/>
 				<textFieldExpression><![CDATA[$P{ID_CODTRA_BT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="277" y="300" width="259" height="20" uuid="67084d36-597e-49ea-814b-150f7b9c7f83"/>
+				<reportElement x="255" y="300" width="210" height="30" uuid="67084d36-597e-49ea-814b-150f7b9c7f83"/>
 				<textFieldExpression><![CDATA[$P{ID_NUMEQU_BT}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="280" y="382" width="256" height="20" uuid="f7b0559e-cff5-43d1-b0fc-47ef0d20c3f2"/>
-				<textFieldExpression><![CDATA[$P{DateFin}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="280" y="340" width="256" height="20" uuid="ec133290-d7e1-4ed8-80f9-facf08bb75d8"/>
-				<textFieldExpression><![CDATA[$P{DateDebut}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="50" splitType="Stretch">
+		<band height="45" splitType="Stretch">
 			<staticText>
 				<reportElement x="100" y="0" width="531" height="30" uuid="de37eeb7-1019-4239-8cb6-94d77b3f6ab2"/>
 				<box>
@@ -295,7 +228,7 @@
 				<text><![CDATA[Classement ABC des Equipement]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="728" y="37" width="69" height="13" uuid="3cb00c50-7a01-4a51-a3b2-398ba1368791">
+				<reportElement x="728" y="31" width="64" height="13" uuid="3cb00c50-7a01-4a51-a3b2-398ba1368791">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7b2c9c9-301f-4ed0-bdcc-f12ceb6b69b6"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="21" bottomPadding="0" rightPadding="0">
@@ -305,7 +238,7 @@
 				<text><![CDATA[cumulé %]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="630" y="37" width="86" height="13" uuid="d6e16ad3-c387-403f-8ef9-7da6c7714795">
+				<reportElement x="598" y="31" width="108" height="13" uuid="d6e16ad3-c387-403f-8ef9-7da6c7714795">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7b2c9c9-301f-4ed0-bdcc-f12ceb6b69b6"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="21" bottomPadding="0" rightPadding="0">
@@ -314,7 +247,16 @@
 				<text><![CDATA[Total cout %]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="72" y="37" width="86" height="13" uuid="d658d475-589d-4cff-b9a8-c33e134e819a">
+				<reportElement x="410" y="31" width="70" height="13" uuid="2c0cc4a7-64d7-43b4-ade7-c173a2a93fa0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62f8690f-3833-44b6-a993-f2941fba2f58"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="21" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.0" lineStyle="Double" lineColor="#0600A8"/>
+				</box>
+				<text><![CDATA[Total_cout]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="31" width="167" height="13" uuid="d658d475-589d-4cff-b9a8-c33e134e819a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62f8690f-3833-44b6-a993-f2941fba2f58"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="21" bottomPadding="0" rightPadding="0">
@@ -323,7 +265,16 @@
 				<text><![CDATA[Des EQU]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="561" y="37" width="55" height="13" uuid="3b2d1e46-0445-42e1-8a9c-187028bc822c">
+				<reportElement x="-5" y="31" width="205" height="13" uuid="246362e2-baed-4320-8b2c-e9eda97d553f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62f8690f-3833-44b6-a993-f2941fba2f58"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="21" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.0" lineStyle="Double" lineColor="#0600A8"/>
+				</box>
+				<text><![CDATA[Code long]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="510" y="30" width="55" height="13" uuid="3b2d1e46-0445-42e1-8a9c-187028bc822c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62f8690f-3833-44b6-a993-f2941fba2f58"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="21" bottomPadding="0" rightPadding="0">
@@ -331,94 +282,39 @@
 				</box>
 				<text><![CDATA[cumulé]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="172" y="37" width="58" height="13" uuid="d6fefe37-690d-444e-b713-21f93d19b060"/>
-				<text><![CDATA[Duree_arret]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="333" y="36" width="65" height="14" uuid="669b4b00-017a-4633-95f1-2767fa011e67"/>
-				<text><![CDATA[Total_matiere]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="403" y="36" width="70" height="14" uuid="c18d5b38-d2f0-4376-aa32-3cc2af67a2ce"/>
-				<text><![CDATA[Total_exterieur]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="239" y="37" width="86" height="13" uuid="f5a0d628-b4bb-49fb-9d13-c4c9649f8225"/>
-				<text><![CDATA[Total_main_oeuvre]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="481" y="37" width="70" height="13" uuid="8c6b3c05-d4c0-4e2f-8d98-667250047b0b"/>
-				<text><![CDATA[Total_Cout]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="-10" y="37" width="73" height="13" uuid="94287e13-8c85-4e36-b5d7-bb10d2d51061"/>
-				<text><![CDATA[ST_CODCOU]]></text>
-			</staticText>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="23" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<textField>
-				<reportElement x="630" y="2" width="86" height="18" uuid="a036445f-8a11-4e7a-b49a-25d46e0bcd01"/>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#.######").format(($F{Total_cout}/$F{Total})*100)]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="728" y="2" width="69" height="18" uuid="db0a6a30-d553-44a2-bd27-08d0cb96690c"/>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#.#######").format(($V{cumulé}/$F{Total})*100)]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="561" y="2" width="55" height="18" uuid="77ea5de7-a4b7-4bae-a462-21cd20baf234"/>
-				<textFieldExpression><![CDATA[$V{cumulé}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="72" y="2" width="86" height="18" uuid="1921ea71-fb0c-4c08-a2b9-a34673f3017d"/>
-				<textFieldExpression><![CDATA[$F{ST_DES_EQU}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="172" y="2" width="58" height="18" uuid="13058c77-2c60-4093-a53c-f40c81ea4d67"/>
-				<textFieldExpression><![CDATA[$F{Duree_arret}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="333" y="2" width="65" height="18" uuid="cfb7201e-b17f-4ff0-9ba4-9ec2347b0ff1"/>
-				<textFieldExpression><![CDATA[$F{Total_matiere}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="403" y="2" width="70" height="18" uuid="84d413fd-dfe2-4a67-8051-b14445fe50e6"/>
-				<textFieldExpression><![CDATA[$F{Total_exterieur}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="239" y="2" width="86" height="18" uuid="657d9162-c3a4-4028-a64d-8910fc9dfbd3"/>
-				<textFieldExpression><![CDATA[$F{Total_main_oeuvre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="-10" y="2" width="73" height="18" uuid="75b28e7f-a5c6-4ec9-8f57-5cd54e562680"/>
-				<textFieldExpression><![CDATA[$F{ST_CODCOU}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="480" y="4" width="70" height="16" uuid="f4e5a28f-3ae1-494d-958b-68ceecf4d9e0">
+				<reportElement x="429" y="2" width="70" height="30" uuid="f4e5a28f-3ae1-494d-958b-68ceecf4d9e0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62f8690f-3833-44b6-a993-f2941fba2f58"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{Total_cout}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="620" y="-1" width="86" height="33" uuid="a036445f-8a11-4e7a-b49a-25d46e0bcd01"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#.######").format(($F{Total_cout}/$F{Total})*100)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="728" y="-3" width="69" height="33" uuid="db0a6a30-d553-44a2-bd27-08d0cb96690c"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#.#######").format(($V{cumulé}/$F{Total})*100)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="536" y="1" width="55" height="31" uuid="77ea5de7-a4b7-4bae-a462-21cd20baf234"/>
+				<textFieldExpression><![CDATA[$V{cumulé}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-5" y="2" width="215" height="30" uuid="42b78270-e2de-46f9-88f4-1f1113b46b3b"/>
+				<textFieldExpression><![CDATA[$F{ST_CODLON_EQU}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="1" width="167" height="31" uuid="1921ea71-fb0c-4c08-a2b9-a34673f3017d"/>
+				<textFieldExpression><![CDATA[$F{ST_DES_EQU}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<summary>
-		<band height="71" splitType="Stretch">
-			<break>
-				<reportElement x="0" y="45" width="789" height="1" uuid="9fb0f89c-26ce-4962-8907-9691e9b5b606"/>
-			</break>
-			<rectangle>
-				<reportElement x="-7" y="4" width="807" height="29" backcolor="rgba(255, 255, 255, 0.019607844)" uuid="d6c4bd2d-719f-4483-a75d-5391c0928df0"/>
-			</rectangle>
-			<textField>
-				<reportElement x="473" y="5" width="97" height="26" uuid="e434071e-7f14-459c-9eb5-0a793821ed98"/>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#.#######").format($V{Total})]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="-7" y="5" width="79" height="15" uuid="e91e8794-9b55-4861-b742-aeef2bfa9246"/>
-				<textFieldExpression><![CDATA["Total"]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="44" splitType="Stretch"/>
 	</summary>
 </jasperReport>

@@ -44,9 +44,19 @@
             <span>Gestion des Utilisateurs</span></a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" th:href="@{/rapport-Management}" sec:authorize="hasRole('ADMIN')">
+        <a class="nav-link" th:href="@{/rapport-Management/delete}" sec:authorize="hasRole('ADMIN')">
           <i class="fas fa-chart-line"></i>
             <span>Gestion des Rapports</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" th:href="@{/rapport-Management/delete}" sec:authorize="hasRole('USER')">
+          <i class="fas fa-chart-line"></i>
+            <span>List Rapports</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/filter-Managment/delete}" sec:authorize="hasRole('ADMIN')">
+          <i class="fas fa-chart-line"></i>
+            <span>Gestion des Filtres</span></a>
       </li>
       
       <!-- Divider -->

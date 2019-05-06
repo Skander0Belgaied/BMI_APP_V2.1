@@ -811,7 +811,7 @@ legend {
 }
 
 .s004 {
-  min-height: 50vh;
+  min-height: 25vh;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;

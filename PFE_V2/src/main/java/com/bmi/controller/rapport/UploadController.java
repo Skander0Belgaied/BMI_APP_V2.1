@@ -133,7 +133,7 @@ public class UploadController {
 					etatRepository.save(e);
 			 }
 			 model.addAttribute("status",FileStatus.get("msg"));
-			 return "/upload-status";
+			 return "redirect:/rapport-Management/delete";
 		 }
 		 else 
 		 {
